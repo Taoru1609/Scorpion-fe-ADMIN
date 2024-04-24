@@ -1,0 +1,43 @@
+.modal-tab {
+    width: 100% !important;
+}
+
+.modal-medium {
+    width: 80% !important;
+}
+
+.modal-small {
+    width: 600px !important;
+}
+
+.message {
+    .icon-message {
+        &::before {
+            content: '';
+        }
+
+        text-align: center;
+        width: 100%;
+
+        img {
+            width: 80px;
+        }
+    }
+
+    .content-message {
+        width: 100%;
+        text-align: center;
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+
+    .content-form {
+        padding-top: 5px;
+        padding-bottom: 10px;
+    }
+
+    .message-action {
+        width: 100%;
+        text-align: center;
+    }
+}

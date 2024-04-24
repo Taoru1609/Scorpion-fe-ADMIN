@@ -1,0 +1,24 @@
+.table-202404101616 {
+    .title-table {
+        height: 40px;
+        line-height: 32px;
+        color: #226bb6;
+        border-bottom: solid 1px #ccc;
+        margin-bottom: 10px;
+
+        .title-bottom {
+            width: 100%;
+            border-bottom: solid 2px #226bb6;
+            display: inline;
+            padding-bottom: 12px;
+        }
+    }
+
+    .ant-table {
+        .ant-table-cell {
+            padding: 8px 5px;
+            font-size: 16px;
+        }
+    }
+
+}
