@@ -19,8 +19,6 @@ const LayoutRoutes: RouteObject = {
     DocumentRouters,
     StaffRouters,
     AdminRouters
-
-
   ],
 };
 

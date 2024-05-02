@@ -1,13 +1,14 @@
 import { FunctionComponent, useEffect, useState } from "react";
-import AddRoomView from "./AddRoom.view";
+import LuuPhongView from "./LuuPhong.view";
 import { DonDatApi } from "src/common/api/DonDatApi";
 import { useDialog } from "src/common/services/dialog/Dialog.provider";
 
-export const AddRoom: FunctionComponent<({
-	idLoaiPhong: any,
+export const LuuPhong: FunctionComponent <({
+	idPhong: any,
 	idPhongDat: any,
+	item?: any,
 	onClose: (hasChange: boolean) => void
-})> = (props) => {
+})> = (props: any) => {
 
 	const [listData, setListData] = useState<any[]>([]);
 	const [idPhong, setIdPhong] = useState<number | null>(null);
@@ -16,10 +17,13 @@ export const AddRoom: FunctionComponent<({
 	const [hasChange, setHasChange] = useState<boolean>(false);
 	const [disabled, setDisabled] = useState<boolean>(false);
 
-	const postLuuPhong = async () => {
 
-		console.log('postLuuPhong', idPhong);
-		const rs = await DonDatApi.postLuuPhong({
+
+	const postDoiPhong = async () => {
+		
+		console.log('postDoiPhong', idPhong);
+
+		await DonDatApi.postDoiPhong({
 			idPhongDat: props.idPhongDat,
 			phongIdPhong: {
 				id: idPhong
@@ -28,7 +32,7 @@ export const AddRoom: FunctionComponent<({
 		
 		setHasChange(true);
 		
-		await dialogService.alert('gán phòng thành công');
+		await dialogService.alert('Đổi phòng thành công');
 		getData();
 		closeDialog(); 
 		
@@ -42,8 +46,8 @@ export const AddRoom: FunctionComponent<({
 	}
 
 	const getData = async () => {
-		
-		const rs = await DonDatApi.getChonPhong(props.idLoaiPhong);
+		debugger;
+		const rs = await DonDatApi.getChonPhong(props.idPhong);
 		setListData(rs.data);
 	}
 
@@ -55,8 +59,7 @@ export const AddRoom: FunctionComponent<({
 	const closeDialog = () => {
 		props.onClose(hasChange);
 	}
-
-	return AddRoomView({ listData, disabled ,postLuuPhong, closeDialog, chonPhong });
+	return LuuPhongView({ listData, disabled ,postDoiPhong, closeDialog, chonPhong });
 };
 
-export default AddRoom;
+export default LuuPhong;

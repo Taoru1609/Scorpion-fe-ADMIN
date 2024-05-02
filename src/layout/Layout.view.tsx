@@ -54,7 +54,7 @@ export const LayoutView = () => {
         {
           id: 7,
           icon: 'isax-chart-square',
-          label: 'SƠ ĐỒ PHÒNG',
+          label: 'SƠ ĐỒ TRẠNG THÁI PHÒNG HIỆN TẠI',
           url: '/staff/roomdiagram',
           parent: 5,
         },

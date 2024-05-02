@@ -35,32 +35,14 @@ export const ReservationDetail: FunctionComponent<({
 		})
 	);
 
-	// const handleSubmit = async (e: any) => {
-	// 	if (e) e.preventDefault();
 
-	// 	// báo lỗi controll nếu lỗi
-	// 	myForm.markAllAsTouched();
-
-	// 	if (myForm.invalid) return;
-
-	// 	let formData = myForm.getRawValue();
-	// 	console.log("Form values", formData);
-
-	// 	// call api
-
-	// 	// set trạng thái đã thêm hoặc sửa dữ liệu
-	// 	setHasChange(true);
-
-	// 	await dialogService.alert("Lưu dữ liệu thành công");
-
-	// 	closeDialog();
-	// }
 
 	const closeDialog = () => {
 		props.onClose(hasChange);
 	}
 
 	const getData = async () => {
+		debugger;
 		const rs = await DonDatApi.getOne(props.id);
 		console.log('getData', rs);
 		
@@ -84,14 +66,14 @@ export const ReservationDetail: FunctionComponent<({
 	const handleOpenDialog = () => {
 		dialogService.openDialog(option => {
 			option.title = 'Check In';
-			option.size = DialogSize.tab;
+			option.size = DialogSize.medium;
 			option.content = (<CheckIn id={props.id}  onClose={(event) => handleCloseDialog(event)} />)
 		});
 	}
 
 	const handleCloseDialog = (hasChange: boolean) => {
 		dialogService.closeDialog();
-		//closeDialog();
+		closeDialog();
 	}
 
 	// init page

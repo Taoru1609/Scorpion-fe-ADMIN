@@ -1,10 +1,18 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import RoomDiagramView from "./RoomDiagram.view";
 import axios from "axios";
+import { useDialog } from "src/common/services/dialog/Dialog.provider";
+import { DialogSize } from "src/common/services/dialog/Dialog.service";
+import RoomDiagramDetail from "./roomdiagram-detail/RoomDiagramDetail";
 
-export const RoomDiagram: FunctionComponent  = (props: any) => {
-	
-	const [isModalUpdateInfoGuest, setModalUpdateInfoGuest] = useState(false);
+export const RoomDiagram: FunctionComponent = (props: any) => {
+
+    const { dialogService } = useDialog();
+
+    const [hasChange, setHasChange] = useState<boolean>(false);
+
+
+    const [isModalUpdateInfoGuest, setModalUpdateInfoGuest] = useState(false);
     const closeModalUpdateInfoGuest = () => {
         setModalUpdateInfoGuest(false);
     }
@@ -14,8 +22,8 @@ export const RoomDiagram: FunctionComponent  = (props: any) => {
     }
 
     // Room data states
-    const [emptyRooms, setEmptyRooms] = useState([]);
-    const [usedRooms, setUsedRooms] = useState([]);
+    const [emptyRooms, setEmptyRooms] = useState<any[]>([]);
+    const [usedRooms, setUsedRooms] = useState<any[]>([]);
     const [dataRoom, setDataRoom] = useState();
     const [service, setService] = useState([]);
     // API endpoints
@@ -23,44 +31,71 @@ export const RoomDiagram: FunctionComponent  = (props: any) => {
     const apiUsedRoom = 'http://localhost:8080/admin/phong/phong-dang-o';
     const apiService = 'http://localhost:8080/admin/loai-dich-vu/hien-thi';
 
-  
-        // Fetch empty rooms
-        const fetchEmptyRooms = async () => {
-            try {
-                const response = await axios.get(apiEmptyRoom);
-                // const decodedData1 = response.data.map((item) => ({
-                //     id: decodeURIComponent(item.id),
-                //     tenLoaiDichVu: decodeURIComponent(item.tenLoaiDichVu),
-                // }));
-                setEmptyRooms(response.data);
-            } catch (error) {
-                console.error('Error fetching empty rooms:', error);
-            }
-        };
 
-        // Fetch used rooms
-        const fetchUsedRooms = async () => {
-            try {
-                const response = await axios.get(apiUsedRoom);
-                // const decodedData2 = response.data.map((item) => ({
-                //     id: decodeURIComponent(item.id),
-                //     tenLoaiDichVu: decodeURIComponent(item.tenLoaiDichVu),
-                // }));
-                setUsedRooms(response.data);
-            } catch (error) {
-                console.error('Error fetching used rooms:', error);
-            }
-        };
+    // Fetch empty rooms
+    const fetchEmptyRooms = async () => {
+        try {
+      
+            const response = await axios.get(apiEmptyRoom);
+            // const decodedData1 = response.data.map((item) => ({
+            //     id: decodeURIComponent(item.id),
+            //     tenLoaiDichVu: decodeURIComponent(item.tenLoaiDichVu),
+            // }));
 
-			// init page
-	useEffect(() => {
-			
-        // Call functions to fetch data
-        fetchEmptyRooms();
-        fetchUsedRooms();
-	}, []);
+            setEmptyRooms(response.data);
+        } catch (error) {
+            console.error('Error fetching empty rooms:', error);
+        }
+    };
+
+    // Fetch used rooms
+    const fetchUsedRooms = async () => {
+        try {
+            debugger;
+            const response = await axios.get(apiUsedRoom);
+            // const decodedData2 = response.data.map((item) => ({
+            //     id: decodeURIComponent(item.id),
+            //     tenLoaiDichVu: decodeURIComponent(item.tenLoaiDichVu),
+            // }));
+            setUsedRooms(response.data);
+        } catch (error) {
+            console.error('Error fetching used rooms:', error);
+        }
+    };
 
    
+	const handleOpenDialog = (item: any) => {
+        console.log(item)
+		dialogService.openDialog(option => {
+			option.title = 'Chi tiết phòng';
+			option.size = DialogSize.medium;
+			option.content = (<RoomDiagramDetail idPhongDat={item.idPhongDat} idPhong={item.idPhong}  onClose={(event) => handleCloseDialog(event)} />)
+         
+		});
+	}
+    	const handleCloseDialog = (hasChange: boolean) => {
+		dialogService.closeDialog();
+
+		if(!hasChange){
+			getService();
+		}
+		// closeDialog();
+	}
+
+
+    const closeDialog = () => {
+		props.onClose(hasChange);
+       
+	}
+
+	
+
+    // init page
+    useEffect(() => {
+     // Call functions to fetch data
+        fetchEmptyRooms();
+        fetchUsedRooms();
+    }, []);
 
 
     //Handle click Plus
@@ -78,13 +113,9 @@ export const RoomDiagram: FunctionComponent  = (props: any) => {
         }
     };
 
-    // Handle click on room
-    const handleRoomClick = (room: any) => {
-        // Logic for handling room click
-        setDataRoom(room)
-    };
 
-	return RoomDiagramView({props, getService,handleRoomClick , fetchUsedRooms, fetchEmptyRooms , emptyRooms , usedRooms});
+
+    return RoomDiagramView({ getService, fetchUsedRooms, fetchEmptyRooms,handleOpenDialog, handleCloseDialog, emptyRooms, usedRooms });
 };
 
 export default RoomDiagram;

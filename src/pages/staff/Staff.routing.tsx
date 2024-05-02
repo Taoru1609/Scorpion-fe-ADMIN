@@ -6,14 +6,11 @@ const StaffRouters: RouteObject = {
   path: "/staff",
   element: <Outlet />,
   children: [
-    { index: true, element: <Reservation /> },
     {
       path: "reservation",
       index: true,
       element: <Reservation />,
     },
-    
-    { index: true, element: <RoomDiagram /> },
     {
       path: "roomdiagram",
       index: true,

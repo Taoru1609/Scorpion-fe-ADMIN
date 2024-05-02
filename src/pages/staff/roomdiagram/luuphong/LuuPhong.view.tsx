@@ -1,12 +1,12 @@
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Select } from "antd";
+import React from "react";
 import DialogButtonClose from "src/common/services/dialog/DialogButtonClose";
 
-export const AddRoomView = (props: any) => {
-
-  return (
-
-    <div>
+export const LuuPhongView = (props: any) => {
+	return (
+		
+		<div>
       <DialogButtonClose onClick={() => props.closeDialog()} />
       <hr />
       <Select
@@ -28,14 +28,14 @@ export const AddRoomView = (props: any) => {
         <button
           type="button"
           className="btn btn-primary"
-          onClick={() => props.postLuuPhong()}
+          onClick={() => props.postDoiPhong()}
           disabled={props.disabled}
         >
           <PlusCircleOutlined className="mr-2" />Lưu
         </button >
       </div >
     </div>
-  );
+	);
 }
 
-export default AddRoomView;
+export default LuuPhongView;

@@ -1,0 +1,127 @@
+/* Layout adjustments */
+.layout-room-diagram {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .layout-room-diagram > * {
+    margin-bottom: 1rem;
+    margin-left: 20px;
+  }
+  
+  .flex-row-room-diagram {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  /* Styling for short static rooms */
+  .short-static-rooms {
+    display: flex;
+    background-color: #dea8b9;
+    border-radius: 10px;
+    padding-bottom: 3rem;
+    padding-top: 0.5rem;
+  }
+  
+  /* Styling for room status */
+  .room-status-room-diagram {
+    display: flex;
+    flex-direction: column;
+    height: 70vh; /* 70% of the viewport height */
+    max-height: 900px; /* Maximum height to prevent it from growing too large on larger screens */
+    overflow-y: auto; /* This will make the div scrollable vertically if content overflows */
+  }
+  
+  /* Styling for rooms */
+  .rooms {
+    position: relative;
+    width: 328px;
+    height: 117px;
+    background: #e2e1e1;
+    border-radius: 15px;
+    display: flex;
+    margin-right: 1rem;
+    margin-bottom: 2rem;
+    transition: box-shadow 0.3s ease;
+    box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.3);
+  }
+  
+  .rooms:hover {
+    box-shadow: 10px 20px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  /* Styling for room info and status sections */
+  .info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    border-radius: 15px;
+  }
+  
+  .room-empty .info {
+    background-color: #33FF66; /* Set background color */
+  }
+  
+  .room-using .info {
+    background-color: 	#FF3366; /* Set background color */
+  }
+  
+  .status {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  /* Styling for modal update info guest */
+  .modal-update-info-guest > * {
+    padding: 1rem;
+  }
+  
+  /* Styling for modal content */
+  .modal-content {
+    padding: 1rem;
+  }
+  
+  /* Styling for navbar detail */
+  .navbar-detail {
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
+  }
+  
+  .navbar-detail > div {
+    padding-right: 10px;
+  }
+  
+  /* Styling for larger text */
+  .larger-text-room-diagram {
+    font-size: 20px;
+    font-weight: bold;
+  }
+  
+  /* Styling for medium text */
+  .medium-text-room-diagram {
+    font-size: 16px;
+    font-weight: bold;
+    padding: 1rem;
+    font-family: "Nunito Sans";
+  }
+  
+  /* Styling for table borders */
+  .border-table {
+    border: 1px solid black;
+  }
+  
+  /* Styling for table font */
+  .font-table > * {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    padding-top: 1rem;
+  }
+  

@@ -22,6 +22,8 @@ export const Reservation: FunctionComponent = (props: any) => {
 
 	const [paging, setPaging] = useState<PagingModal>(new PagingModal());
 
+	const [hasChange, setHasChange] = useState<boolean>(false);
+
 	const [formSearch] = useState<FormGroup>(
 		FormBuilder.group({
 			q: ['']
@@ -42,6 +44,7 @@ export const Reservation: FunctionComponent = (props: any) => {
 		}));
 		//setPaging(rs.paging);
 		loadingService.closeLoading();
+
 	}
 
 	const handleSubmit = (e: any) => {
@@ -66,7 +69,7 @@ export const Reservation: FunctionComponent = (props: any) => {
 
 	const handleCloseDialog = (hasChange: boolean) => {
 		dialogService.closeDialog();
-		if (hasChange) {
+		if (!hasChange) {
 			// có thay đổi dữ liệu refesh data tại trang hiện tại
 			getData();
 		}
@@ -76,6 +79,10 @@ export const Reservation: FunctionComponent = (props: any) => {
 	useEffect(() => {
 		getData();
 	}, []);
+
+	useEffect(() => {
+		getData();
+	}, [hasChange]);
 
 	return ReservationView({ formSearch, listData, paging, getData, handleSubmit, handleOpenDialog, handleCloseDialog, setPaging });
 };
