@@ -1,12 +1,10 @@
 import { FunctionComponent, useEffect, useState } from "react";
 import ReservationView from "./Reservation.view";
 import { FormGroup, FormBuilder } from "react-reactive-form";
-import { Document1Api } from "src/common/api/Document1Api";
 import { PagingModal } from "src/common/model/PagingModal";
 import { useDialog } from "src/common/services/dialog/Dialog.provider";
 import { DialogSize } from "src/common/services/dialog/Dialog.service";
 import { useLoading } from "src/common/services/loading/Loading.provider";
-import Document1Detail from "src/pages/documents/document1/document1-detail/Document1Detail";
 import { DonDatApi } from "src/common/api/DonDatApi";
 import ReservationDetail from "./reservation-detail/ReservationDetail";
 
@@ -21,8 +19,6 @@ export const Reservation: FunctionComponent = (props: any) => {
 	const [listData, setListData] = useState<any[]>([]);
 
 	const [paging, setPaging] = useState<PagingModal>(new PagingModal());
-
-	const [hasChange, setHasChange] = useState<boolean>(false);
 
 	const [formSearch] = useState<FormGroup>(
 		FormBuilder.group({
@@ -69,7 +65,7 @@ export const Reservation: FunctionComponent = (props: any) => {
 
 	const handleCloseDialog = (hasChange: boolean) => {
 		dialogService.closeDialog();
-		if (!hasChange) {
+		if (hasChange) {
 			// có thay đổi dữ liệu refesh data tại trang hiện tại
 			getData();
 		}
@@ -79,10 +75,6 @@ export const Reservation: FunctionComponent = (props: any) => {
 	useEffect(() => {
 		getData();
 	}, []);
-
-	useEffect(() => {
-		getData();
-	}, [hasChange]);
 
 	return ReservationView({ formSearch, listData, paging, getData, handleSubmit, handleOpenDialog, handleCloseDialog, setPaging });
 };

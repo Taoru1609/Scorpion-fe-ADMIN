@@ -9,9 +9,6 @@ export const RoomDiagram: FunctionComponent = (props: any) => {
 
     const { dialogService } = useDialog();
 
-    const [hasChange, setHasChange] = useState<boolean>(false);
-
-
     const [isModalUpdateInfoGuest, setModalUpdateInfoGuest] = useState(false);
     const closeModalUpdateInfoGuest = () => {
         setModalUpdateInfoGuest(false);
@@ -35,7 +32,7 @@ export const RoomDiagram: FunctionComponent = (props: any) => {
     // Fetch empty rooms
     const fetchEmptyRooms = async () => {
         try {
-      
+
             const response = await axios.get(apiEmptyRoom);
             // const decodedData1 = response.data.map((item) => ({
             //     id: decodeURIComponent(item.id),
@@ -51,7 +48,7 @@ export const RoomDiagram: FunctionComponent = (props: any) => {
     // Fetch used rooms
     const fetchUsedRooms = async () => {
         try {
-            debugger;
+
             const response = await axios.get(apiUsedRoom);
             // const decodedData2 = response.data.map((item) => ({
             //     id: decodeURIComponent(item.id),
@@ -63,38 +60,31 @@ export const RoomDiagram: FunctionComponent = (props: any) => {
         }
     };
 
-   
-	const handleOpenDialog = (item: any) => {
-        console.log(item)
-		dialogService.openDialog(option => {
-			option.title = 'Chi tiết phòng';
-			option.size = DialogSize.medium;
-			option.content = (<RoomDiagramDetail idPhongDat={item.idPhongDat} idPhong={item.idPhong}  onClose={(event) => handleCloseDialog(event)} />)
-         
-		});
-	}
-    	const handleCloseDialog = (hasChange: boolean) => {
-		dialogService.closeDialog();
 
-		if(!hasChange){
-			getService();
-		}
-		// closeDialog();
-	}
+    const handleOpenDialog = (item: any) => {
+        console.log(props.idKhachO)
+        dialogService.openDialog(option => {
 
+            option.size = DialogSize.medium;
+            option.content = (<RoomDiagramDetail idPhongDat={item.idPhongDat} idLoaiPhong={item.idLoaiPhong} onClose={(hasChange) => handleCloseDialog(hasChange)} />)
 
-    const closeDialog = () => {
-		props.onClose(hasChange);
-       
-	}
-
-	
+        });  
+        
+        const handleCloseDialog = (hasChange: boolean) => {
+            dialogService.closeDialog();
+    
+            if (hasChange) {
+                fetchUsedRooms();
+            }
+        }
+    }
 
     // init page
     useEffect(() => {
-     // Call functions to fetch data
+        // Call functions to fetch data
         fetchEmptyRooms();
         fetchUsedRooms();
+
     }, []);
 
 
@@ -115,7 +105,7 @@ export const RoomDiagram: FunctionComponent = (props: any) => {
 
 
 
-    return RoomDiagramView({ getService, fetchUsedRooms, fetchEmptyRooms,handleOpenDialog, handleCloseDialog, emptyRooms, usedRooms });
+    return RoomDiagramView({ getService, fetchUsedRooms, fetchEmptyRooms, handleOpenDialog, emptyRooms, usedRooms });
 };
 
 export default RoomDiagram;

@@ -1,11 +1,11 @@
 import { InputNumber as NzInputNumber } from 'antd';
 
-export const InputNumber = (props: ({ handler?: any, touched?: any, hasError?: any, meta?: any })) => {
+export const InputNumber = (props: ({ handler?: any, touched?: any, hasError?: any, errors?: any, meta?: any })) => {
 	return (
 		<div className="input-number">
 			{props.meta.label && (<div className="control-label">{props.meta.label}</div>)}
 			<div className="control-item">
-				<NzInputNumber<number> status={props.touched && props.hasError("required") ? 'error' : null}
+				<NzInputNumber<number> status={props.touched && props.hasError("error") ? 'error' : null}
 					placeholder={props.meta?.placeholder}
 					formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
 					parser={(value) => value?.replace(/\$\s?|(,*)/g, '') as unknown as number}
@@ -14,8 +14,9 @@ export const InputNumber = (props: ({ handler?: any, touched?: any, hasError?: a
 			</div>
 			<div className="control-error">
 				{props.touched
-					&& props.hasError("required")
-					&& `Không được để trống`}
+					&& props.hasError("error")
+					&& props.errors.error
+				}
 			</div>
 		</div>
 	);

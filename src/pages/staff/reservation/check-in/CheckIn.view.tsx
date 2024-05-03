@@ -2,10 +2,10 @@ import { CloseOutlined, EditOutlined, PlusCircleOutlined } from "@ant-design/ico
 import { Table, InputNumber, Button } from "antd";
 import React from "react";
 import { FieldGroup, FieldControl } from "react-reactive-form";
-import InputSelect from "src/common/controls/InputSelect";
-import InputText from "src/common/controls/InputText";
+
 import DialogButtonClose from "src/common/services/dialog/DialogButtonClose";
 import "./CheckIn.style.scss";
+import InputText from "src/common/controls/InputText";
 
 export const CheckInView = (props: any) => {
 
@@ -58,8 +58,8 @@ export const CheckInView = (props: any) => {
 		{
 			title: 'Tên khách',
 
-			dataIndex: 'tenKhach',
-			key: 'tenKhach',
+			dataIndex: 'tenKhachO',
+			key: 'tenKhachO',
 
 		},
 
@@ -68,15 +68,20 @@ export const CheckInView = (props: any) => {
 			render: (item: any) => {
 				return <div>
 					<div className="btn-left">
-						<Button type="text" onClick={() => props.getPhongDaChon(item)}>
+						<Button type="text" onClick={() => props.handleOpenGuest(item)}>
 							Sửa
 						</Button>
 					</div>
-
+					<div className="btn-left">
+						<Button type="text" onClick={() => props.deleteKhach(item)}>
+							Xóa
+						</Button>
+					</div>
 
 				</div>
 			}
 		},
+		
 	];
 	return (
 		<div>
@@ -88,21 +93,7 @@ export const CheckInView = (props: any) => {
 			<hr />
 			<Table dataSource={props.listData} columns={columns} pagination={false} ></Table> <br />
 
-			<h4>
-				Thông tin khách
-			</h4>
-			<hr />
-			<button
-				type="button"
-				className="btn btn-primary"
-				onClick={() => props.handleOpenGuest()}
-			>
-				Thêm
-			</button >
 
-			<br />
-			
-			<Table dataSource={props.listData} columns={columns1} pagination={false} ></Table> <br />
 
 
 			<FieldGroup
@@ -117,7 +108,7 @@ export const CheckInView = (props: any) => {
 							<PlusCircleOutlined className="mr-2" />Gán phòng
 						</button >
 
-						<div className="col-md-6">
+						<div >
 							<FieldControl
 								name="tenLoaiPhong"
 								meta={{ label: "Tên loại phòng" }}
@@ -125,7 +116,7 @@ export const CheckInView = (props: any) => {
 							/>
 						</div>
 
-						<div className="col-md-6">
+						<div >
 							<FieldControl
 								name="thoiGianVao"
 								meta={{ label: "Thời gian vào" }}
@@ -134,7 +125,7 @@ export const CheckInView = (props: any) => {
 						</div>
 
 
-						<div className="col-md-6">
+						<div >
 							<FieldControl
 								name="thoiGianRa"
 								meta={{ label: "Thời gian ra" }}
@@ -143,13 +134,29 @@ export const CheckInView = (props: any) => {
 						</div>
 
 
-						<div className="col-md-6">
+						<div >
 							<FieldControl
 								name="soTienPhong"
 								meta={{ label: "Giá phòng" }}
 								render={InputText}
 							/>
 						</div>
+
+						<h4>
+							Thông tin khách
+						</h4>
+						<hr />
+						<button
+							type="button"
+							className="btn btn-primary"
+							onClick={() => props.handleOpenGuest()}
+						>
+							Thêm
+						</button >
+
+						<br />
+
+						<Table dataSource={props.detailListData} columns={columns1} pagination={false} ></Table> <br />
 
 						<div className="list-control-search">
 							<button

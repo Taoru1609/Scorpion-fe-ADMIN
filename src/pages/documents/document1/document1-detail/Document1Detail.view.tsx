@@ -1,8 +1,8 @@
 
 import { FieldControl, FieldGroup } from "react-reactive-form";
 import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
-import InputText from "src/common/controls/InputText";
 import DialogButtonClose from "src/common/services/dialog/DialogButtonClose";
+import InputText from "src/common/controls/InputText";
 import InputNumber from "src/common/controls/InputNumber";
 
 export const Document1DetailView = (props: any) => {

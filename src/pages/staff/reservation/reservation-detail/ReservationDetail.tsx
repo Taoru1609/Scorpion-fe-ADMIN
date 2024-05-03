@@ -18,8 +18,6 @@ export const ReservationDetail: FunctionComponent<({
 
 	const [listData, setListData] = useState<any[]>([]);
 
-	const [hasChange, setHasChange] = useState<boolean>(false);
-
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
 			thoiGianVao: [null, Validators.required],
@@ -37,7 +35,7 @@ export const ReservationDetail: FunctionComponent<({
 
 
 
-	const closeDialog = () => {
+	const closeDialog = (hasChange: boolean = false) => {
 		props.onClose(hasChange);
 	}
 
@@ -73,7 +71,7 @@ export const ReservationDetail: FunctionComponent<({
 
 	const handleCloseDialog = (hasChange: boolean) => {
 		dialogService.closeDialog();
-		closeDialog();
+		closeDialog(hasChange);
 	}
 
 	// init page

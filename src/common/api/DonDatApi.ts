@@ -40,4 +40,19 @@ export class DonDatApi extends HttpClient {
         return axios.post<T>(`${this.baseApi}/phong-dat/doi-phong`, body);
     }
 
+    public static addKhachO<T = any>(body: any) {
+        return axios.post<T>(`${this.baseApi}/admin/khach-hang-o/add`, body);
+    }
+
+    public static updateKhachO<T = any>(id: any, body : any) {
+        return axios.post<T>(`${this.baseApi}/admin/khach-hang-o/update/${id}`,body);
+    }
+
+    public static detailKhachO<T = any>(id: any) {
+        return axios.get<T>(`${this.baseApi}/admin/khach-hang-o/detail/${id}`);
+    }
+
+    public static deleteKhachO<T = any>(id: any) {
+        return axios.delete<T>(`${this.baseApi}/admin/khach-hang-o/delete/${id}`);
+    }
 }

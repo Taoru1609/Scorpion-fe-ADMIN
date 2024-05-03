@@ -2,18 +2,22 @@ import { FunctionComponent, useEffect, useState } from "react";
 import AddGuestView from "./AddGuest.view";
 import { FormBuilder, FormGroup, Validators } from "react-reactive-form";
 import { DonDatApi } from "src/common/api/DonDatApi";
+import { useDialog } from "src/common/services/dialog/Dialog.provider";
 
 export const AddGuest: FunctionComponent <({
+	
+	idKhachO?: any,
 	idLoaiPhong: any,
 	idPhongDat: any,
 	onClose: (hasChange: boolean) => void
 })> = (props: any) => {
 
 	const [listData, setListData] = useState<any[]>([]);
-	const [hasChange, setHasChange] = useState<boolean>(false);
-
+	const { dialogService } = useDialog();
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
+			id: [props.idKhachO],
+			phongDatIdPhongDat: [props.idPhongDat],
 			hoTen: [null, Validators.required],
 			soGiayTo: [null, Validators.required],
 			tenGiayTo: [null, Validators.required],
@@ -21,27 +25,40 @@ export const AddGuest: FunctionComponent <({
 		})
 	);
 
-	const save = async () => {
+	const inTuKhachO = async () => {
+	
+		if(props.idKhachO){
+			const rs = await DonDatApi.detailKhachO(props.idKhachO)
+			myForm.patchValue(rs.data);
+		}
+		
+	}
 
+	
+
+	const save = async () => {
+		
+	
 		if(myForm.invalid) return;
 
-		console.log(myForm)
-		// let message;
-		// let create = await donDatApi.addGuests(myform.value);
-		// let update = await donDatApi.editGuests(id, myform.value);
 
-		// if(id){
-		// 	message = "Cập nhật thành công";
-		// 	return update;
-		// }else{
-		// 	message = "Thêm mới thành công";
-		// 	return create;
-		// }
+		if(props.idKhachO){
+			await DonDatApi.updateKhachO(props.idKhachO, myForm.value);
 
-		// messageDialog.alert({
-		// 	text: message
-		// })
+			await dialogService.alert('Cập nhật thành công');
+		
+			
+		}else{
+			await DonDatApi.addKhachO(myForm.value);
+			await dialogService.alert('Thêm thành công');
+			
+			
+		}
+		closeDialog(); 
+
 	}
+
+
 	
 	// const getData = async () => {
 	// 	debugger;
@@ -59,13 +76,15 @@ export const AddGuest: FunctionComponent <({
 	
 	// 	})
 	// }
-	const closeDialog = () => {
+
+	const closeDialog = (hasChange: boolean = false) => {
 		props.onClose(hasChange);
 	}
 
-	// useEffect(() => {
-	// 	getData();
-	// }, []);
+	useEffect(() => {
+		// getData();
+		inTuKhachO();
+	}, []);
 
 	return AddGuestView({myForm, closeDialog, save});
 };

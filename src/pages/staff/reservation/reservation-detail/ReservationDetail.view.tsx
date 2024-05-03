@@ -2,10 +2,9 @@ import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Table } from "antd";
 import { FieldGroup, FieldControl } from "react-reactive-form";
 import TableView from "src/common/components/table/Table.view";
-import InputDate from "src/common/controls/InputDate";
-import InputDateTime from "src/common/controls/InputDateTime";
 import InputNumber from "src/common/controls/InputNumber";
 import InputText from "src/common/controls/InputText";
+
 import DialogButtonClose from "src/common/services/dialog/DialogButtonClose";
 
 export const ReservationDetailView = (props: any) => {

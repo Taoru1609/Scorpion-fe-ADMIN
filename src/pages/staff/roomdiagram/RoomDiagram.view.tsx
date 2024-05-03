@@ -29,7 +29,7 @@ export const RoomDiagramView = (props: any) => {
                             <div className="info">
                                 <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>PHÒNG</div>
                                 <div style={{ marginBottom: '5px' }}>{room.tenPhong}</div>
-                                <div>ID PHÒNG : {room.idPhong}</div>
+                                <div className="tenLoaiPhong-text"> {room.tenLoaiPhong}</div>
                             </div>
                             <div className="status">Phòng trống</div>
                         </div>
@@ -46,7 +46,7 @@ export const RoomDiagramView = (props: any) => {
                             <div className="info">
                                 <div style={{ fontWeight: 'bold', marginBottom: '5px' }}>PHÒNG</div>
                                 <div style={{ marginBottom: '5px' }}>{room.tenPhong}</div>
-                                <div>ID PHÒNG : {room.idPhong}</div>
+                                <div className="tenLoaiPhong-text">{room.tenLoaiPhong}</div>
                               
                             </div>
                           

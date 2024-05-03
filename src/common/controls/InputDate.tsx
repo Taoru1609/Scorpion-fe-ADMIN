@@ -1,29 +1,35 @@
 import { DatePicker } from "antd";
-// import dayjs from 'dayjs';
-// import customParseFormat from 'dayjs/plugin/customParseFormat';
+import dayjs from 'dayjs';
 
-// dayjs.extend(customParseFormat);
+export const InputDate = (props: ({ handler?: any, touched?: any, hasError?: any, errors?: any, meta?: any })) => {
 
-// const { RangePicker } = DatePicker;
-
-// const dateFormat = 'DD/MM/YYYY';
-
-export const InputDate = (props: ({ handler?: any, touched?: any, hasError?: any, meta?: any })) => {
+    const dateFormat = 'DD/MM/YYYY';
 
     if (!props.meta?.placeholder) {
         props.meta = { ...props.meta, placeholder: 'DD/MM/YYYY' }
     }
 
+    let data = props.handler();
+
+    if (data.value) {
+        data.value = dayjs(data.value, dateFormat);
+    }
+
     return (
         <div className="input-date">
             {props.meta?.label && (<div className="control-label">{props.meta?.label}</div>)}
+
             <div className="control-item">
-                <DatePicker status={props.touched && props.hasError("required") ? 'error' : null} placeholder={props.meta?.placeholder}  {...props.handler()} />
+                <DatePicker
+                    format={dateFormat} placeholder={props.meta?.placeholder}
+                    status={props.touched && props.hasError("error") ? 'error' : null}
+                    {...data} />
             </div>
             <div className="control-error">
                 {props.touched
-                    && props.hasError("required")
-                    && `Không được để trống`}
+                    && props.hasError("error")
+                    && props.errors.error
+                }
             </div>
         </div>
     );

@@ -7,6 +7,7 @@ import PagingView from "src/common/components/paging/Paging.view";
 import TableView from "src/common/components/table/Table.view";
 import InputText from "src/common/controls/InputText";
 
+
 export const Document1View = (props: any) => {
 
 	const columns = [

@@ -26,11 +26,9 @@ export const AddRoom: FunctionComponent<({
 			}
 		});
 		
-		setHasChange(true);
-		
 		await dialogService.alert('gán phòng thành công');
 		getData();
-		closeDialog(); 
+		closeDialog(true); 
 		
 	}
 
@@ -52,7 +50,7 @@ export const AddRoom: FunctionComponent<({
 		setDisabled(true);
 	}, []);
 
-	const closeDialog = () => {
+	const closeDialog = (hasChange: boolean = false) => {
 		props.onClose(hasChange);
 	}
 

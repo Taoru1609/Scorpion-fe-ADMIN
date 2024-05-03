@@ -14,8 +14,6 @@ export const Document1Detail: FunctionComponent<({
 
 	const { dataShareService } = useDataShare();
 
-	const [hasChange, setHasChange] = useState<boolean>(false);
-
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
 			code: ['', Validators.required],
@@ -37,19 +35,16 @@ export const Document1Detail: FunctionComponent<({
 
 		// call api
 
-		// set trạng thái đã thêm hoặc sửa dữ liệu
-		setHasChange(true);
-
 		await dialogService.alert("Lưu dữ liệu");
 
 		const confirm = await dialogService.confirmData("Bạn có muốn đóng dialog ko?");
 		if (confirm) {
-			closeDialog();
+			closeDialog(true);
 		}
 
 	}
 
-	const closeDialog = () => {
+	const closeDialog = (hasChange: boolean = false) => {
 		props.onClose(hasChange);
 	}
 
