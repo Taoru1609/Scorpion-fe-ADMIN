@@ -24,7 +24,7 @@ export const AddRoom: FunctionComponent<({
 			phongIdPhong: {
 				id: idPhong
 			}
-		});
+		});		debugger
 		
 		await dialogService.alert('gán phòng thành công');
 		getData();

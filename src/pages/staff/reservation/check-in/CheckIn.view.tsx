@@ -36,7 +36,7 @@ export const CheckInView = (props: any) => {
 
 
 					{
-						item.tenPhong !== null && item.trangThai !== "Checkin" && (
+						item.tenPhong !== null && item.trangThai !== "Checkin" &&  (
 							<div className="btn-right">
 								<button
 									type="button"
@@ -113,6 +113,7 @@ export const CheckInView = (props: any) => {
 								name="tenLoaiPhong"
 								meta={{ label: "Tên loại phòng" }}
 								render={InputText}
+								
 							/>
 						</div>
 

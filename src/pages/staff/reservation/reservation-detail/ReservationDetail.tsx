@@ -40,7 +40,7 @@ export const ReservationDetail: FunctionComponent<({
 	}
 
 	const getData = async () => {
-		debugger;
+		
 		const rs = await DonDatApi.getOne(props.id);
 		console.log('getData', rs);
 		
@@ -72,6 +72,7 @@ export const ReservationDetail: FunctionComponent<({
 	const handleCloseDialog = (hasChange: boolean) => {
 		dialogService.closeDialog();
 		closeDialog(hasChange);
+		getData();
 	}
 
 	// init page

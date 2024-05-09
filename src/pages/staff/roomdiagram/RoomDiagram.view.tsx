@@ -18,7 +18,7 @@ export const RoomDiagramView = (props: any) => {
             {/* display status of rooms */}
             <div className="room-status-room-diagram">
                 <div>
-                    <div className="medium-text-room-diagram">Phòng Trống()</div>
+                    <div className="medium-text-room-diagram">Phòng Trống</div>
                 </div>
 
                 <div className="room-empty flex-row-room-diagram">
@@ -38,7 +38,7 @@ export const RoomDiagramView = (props: any) => {
 
 
                 <div>
-                    <div className="medium-text-room-diagram">Có Khách()</div>
+                    <div className="medium-text-room-diagram">Có Khách</div>
                 </div>
                 <div className="room-using flex-row-room-diagram">
                     {props.usedRooms.map((room: any, index: any) => (

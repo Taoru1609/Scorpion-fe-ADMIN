@@ -125,7 +125,7 @@ export const ReservationDetailView = (props: any) => {
 								className="btn btn-default"
 								onClick={() => props.closeDialog()} >
 								<CloseOutlined className="mr-2" />
-								{props.mode === "view" ? "Đóng" : "Hủy Đặt phòng"}
+								{props.mode === "view" ? "Đóng" : "Đóng"}
 							</button>
 							<button
 								type="button"

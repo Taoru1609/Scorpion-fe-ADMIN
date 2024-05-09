@@ -7,7 +7,7 @@ export const Error404View = (props: any) => {
 			status="404"
 			title="404"
 			subTitle="Trang web không tồn tại"
-			extra={<Button type="primary">Trở về trang login</Button>}
+			extra={<Button type="primary" >Trở về trang login </Button>}
 		/>
 	);
 }

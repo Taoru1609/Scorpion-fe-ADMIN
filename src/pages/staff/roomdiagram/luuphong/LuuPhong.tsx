@@ -3,6 +3,7 @@ import LuuPhongView from "./LuuPhong.view";
 import { DonDatApi } from "src/common/api/DonDatApi";
 import { useDialog } from "src/common/services/dialog/Dialog.provider";
 import { useDataShare } from "src/common/services/data-share/DataShare.provider";
+import { useNavigate } from "react-router-dom";
 
 export const LuuPhong: FunctionComponent <({
 	idLoaiPhong: any,
@@ -34,7 +35,7 @@ export const LuuPhong: FunctionComponent <({
 		dataShareService.setValue('hasChange02', true);
 		closeDialog(); 
 	}
-
+	
 	const chonPhong = (event: number) => {
 		if(event){
 			setDisabled(false)

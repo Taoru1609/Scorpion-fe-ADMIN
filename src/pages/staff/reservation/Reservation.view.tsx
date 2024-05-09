@@ -1,5 +1,5 @@
 import { EditOutlined } from "@ant-design/icons";
-import { Button } from "antd";
+import { Button, Pagination, Table } from "antd";
 import { Content } from "antd/es/layout/layout";
 import React from "react";
 import { render } from "react-dom";
@@ -47,9 +47,17 @@ export const ReservationView = (props: any) => {
 			title: 'Thao tác',
 			render: (item: any) => {
 				return <div>
+
+					{
+						item.tenPhong !== null && item.trangThai !== "HUY" &&  (
+							<div>
 					<Button type="text" onClick={() => clickEdit(item)}>
 						{<EditOutlined />}
 					</Button>
+				</div>
+						)
+					}
+
 				</div>
 			}
 		},
@@ -62,19 +70,12 @@ export const ReservationView = (props: any) => {
 
 	return (
 		<div>
-			<BreadcumbView>
-				<>
-					
-					{/* <button
-						type="button"
-						className="btn btn-primary ml-2"
-					>
-						<i className="isax-add-circle1 mr-2"></i>Import
-					</button> */}
-				</>
-			</BreadcumbView>
+			<div className="layout-room-diagram">
+			<h2 className="breadcrumb-title">Danh sách khách đặt</h2>
+
+			</div>
 			<Content>
-				<FormSearchBasicView>
+			
 					<FieldGroup
 						control={props.formSearch}
 						render={({ get, invalid }) => (
@@ -87,8 +88,8 @@ export const ReservationView = (props: any) => {
 							</form>
 						)}
 					/>
-				</FormSearchBasicView>
-				<TableView dataSource={props.listData} columns={columns}></TableView>
+		
+				<Table dataSource={props.listData} columns={columns} pagination={{ pageSize: 8 }} ></Table>
 				<PagingView data={props.paging} onChange={(page) => changePage(page)}></PagingView>
 			</Content>
 		</div >

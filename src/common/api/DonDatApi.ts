@@ -55,4 +55,44 @@ export class DonDatApi extends HttpClient {
     public static deleteKhachO<T = any>(id: any) {
         return axios.delete<T>(`${this.baseApi}/admin/khach-hang-o/delete/${id}`);
     }
+
+    public static postCheckOut<T = any>(idDonDat: any, idPhongDat:any) {
+        return axios.post<T>(`${this.baseApi}/phong-dat/checkout?idDonDat=${idDonDat}&idPhongDat=${idPhongDat}`);
+    }
+
+    public static locTheoDichVu<T = any>(id: any) {
+        
+        return axios.get<T>(`${this.baseApi}/admin/dich-vu/loc-theo-loai-dich-vu/${id ? ('?id='+id) : '' }`);
+    }
+
+    public static getAllDichVu<T = any>() {
+        return axios.get<T>(`${this.baseApi}/admin/loai-dich-vu/hien-thi`);
+    }
+
+    public static addDichVu<T = any>(body: any) {
+        return axios.post<T>(`${this.baseApi}/admin/dich-vu-dat/add`, body);
+    }
+
+    public static deleteDichVu<T = any>(id: any) {
+        return axios.delete<T>(`${this.baseApi}/admin/dich-vu-dat/delete/${id}`);
+    }
+
+    public static getHoaDon<T = any>(id: any) {
+        return axios.get<T>(`${this.baseApi}/hoa-don-phong/${id}`);
+    }
+
+    public static getHinhThucThanhToan<T = any>() {
+        return axios.get<T>(`${this.baseApi}/httt`);
+    }
+   
+
+    public static addHoaDon<T = any>(body: any) {
+        return axios.post<T>(`${this.baseApi}/hoa-don-phong/add`, body);
+    }
+
+    public static inHoaDon<T = any>(id: any) {
+        return axios.get<T>(`${this.baseApi}/hoa-don-phong/chi-tiet/${id}`);
+    }
+
+
 }

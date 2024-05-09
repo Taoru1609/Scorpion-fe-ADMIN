@@ -1,7 +1,7 @@
 import { Layout } from "antd";
 import "./Layout.style.scss";
 import Sider from "antd/es/layout/Sider";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Menu from "./menu/Menu";
 import Navbar from "./navbar/Navbar";
@@ -13,8 +13,22 @@ export const LayoutView = () => {
   const [hideHtml, setHideHtml] = useState(true);  // hide html if loading UI
   const { loadingService } = useLoading();
   const { dataShareService } = useDataShare();
+  const navigate = useNavigate();
 
   // call api authorization (menu, userinfo, list action)
+
+  const checkLogin = () => {
+    let idsUser:any;
+		let idsUserStore = localStorage.getItem("idsUser");
+		if(idsUserStore){
+			idsUser = JSON.parse(idsUserStore);
+		}
+
+    if(!idsUser){
+      navigate("/public/login");
+    }
+
+  }
 
   const getApiData = () => {
     setTimeout(() => {
@@ -33,7 +47,7 @@ export const LayoutView = () => {
           id: 2,
           icon: 'isax-document-text1',
           label: 'LOẠI PHÒNG',
-          url: '/admin/roomtype',
+          url: '/admin/roomtest',
           parent: 1
         },
        
@@ -93,6 +107,7 @@ export const LayoutView = () => {
 
   useEffect(() => {
     getApiData();
+    checkLogin();
   }, []);
 
   const layoutHtml = (

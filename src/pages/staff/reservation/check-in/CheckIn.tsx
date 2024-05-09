@@ -10,7 +10,7 @@ import AddGuest from "../../addguest/AddGuest";
 import { useLoading } from "src/common/services/loading/Loading.provider";
 
 export const CheckIn: FunctionComponent<({
-	id?: string,	
+	id?: string,
 	onClose: (hasChange: boolean) => void
 })> = (props) => {
 
@@ -31,7 +31,7 @@ export const CheckIn: FunctionComponent<({
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
 			idLoaiPhong: [null],
-			idPhongDat:[null],
+			idPhongDat: [null],
 			tenLoaiPhong: [null, Validators.required],
 			thoiGianVao: [null, Validators.required],
 			thoiGianRa: [null, Validators.required],
@@ -39,10 +39,10 @@ export const CheckIn: FunctionComponent<({
 			tenPhong: [null, Validators.required],
 		})
 	);
-	
+
 	const postCheckIn = async (item: any) => {
 		const rs = await DonDatApi.postCheckIn(item.idPhongDat);
-		
+
 		setHasChange(true);
 		await dialogService.alert('Check in thành công');
 		getData();
@@ -52,10 +52,10 @@ export const CheckIn: FunctionComponent<({
 		props.onClose(hasChange);
 
 	}
-	
+
 
 	const handleOpenDialog = () => {
-		
+
 		if (selected === false) {
 			dialogService.alert('Vui lòng chọn thao tác phòng trước');
 			return;
@@ -69,48 +69,55 @@ export const CheckIn: FunctionComponent<({
 
 		const handleCloseDialog = (hasChange: boolean) => {
 			dialogService.closeDialog();
-	
-			if(!hasChange){
+
+			if (hasChange) {
 				getData();
 			}
 			//closeDialog();
 		}
 	}
 
-	const handleOpenGuest = (item?:any) => {
-		
-		let idKhachO:any;
+	const handleOpenGuest = (item?: any) => {
 
-		if(item){
+		if (selected === false) {
+			dialogService.alert('Vui lòng chọn thao tác phòng trước');
+			return;
+		}
+		let idKhachO: any;
+
+		if (item) {
 			idKhachO = item.idKhachO;
-		}else{
+		} else {
 			idKhachO = null;
 		}
-		
+
 		// gan phong
 		dialogService.openDialog(option => {
 			option.title = 'Thông tin khách ';
 			option.size = DialogSize.small;
-			option.content = (<AddGuest idPhongDat={myForm.get('idPhongDat').value} idKhachO={idKhachO} idLoaiPhong={myForm.get('idLoaiPhong').value}  onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
+			option.content = (<AddGuest idPhongDat={myForm.get('idPhongDat').value} idKhachO={idKhachO} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
 		});
 
 		const handleCloseDialog = (hasChange: boolean) => {
 			dialogService.closeDialog();
-	
-			if(!hasChange){
+
+			if (!hasChange) {
 				// refesh data
-				getPhongDaChon({idPhongDat: myForm.get('idPhongDat').value});
+				getPhongDaChon({ idPhongDat: myForm.get('idPhongDat').value });
 			}
 		}
 	}
-
+	//handle xóa khách
 	const deleteKhach = async (item?: any) => {
-	
-		if(item.idKhachO){
+		const result = await dialogService.confirm('Bạn có chắc chắn muốn xóa không?');
+		if (!result) {
+			return;
+		}
+		if (item.idKhachO) {
 			loadingService.openLoading();
 			await DonDatApi.deleteKhachO(item.idKhachO);
-					// refesh data
-			await getPhongDaChon({idPhongDat: myForm.get('idPhongDat').value});
+			// refesh data
+			await getPhongDaChon({ idPhongDat: myForm.get('idPhongDat').value });
 
 			loadingService.closeLoading();
 
@@ -118,7 +125,7 @@ export const CheckIn: FunctionComponent<({
 		}
 	}
 
-	const getDataDetail = async (item:any) => {
+	const getDataDetail = async (item: any) => {
 		const rs = await DonDatApi.getDetailPhongDat(item.idPhongDat);
 		const { khachO } = rs.data;
 
@@ -132,13 +139,13 @@ export const CheckIn: FunctionComponent<({
 		const { khachO } = rs.data;
 
 		setDetailListData(khachO);
-		
+
 		let data = {
 			tienLoaiPhong: calculatePrice(convertDate(rs.data.thoiGianRa), convertDate(rs.data.thoiGianVao), rs.data.tienLoaiPhong),
 			...rs.data
 		};
 
-		
+
 		myForm.patchValue(data);
 		setSelected(true);
 
@@ -150,7 +157,7 @@ export const CheckIn: FunctionComponent<({
 		console.log('checkIn');
 	}
 
-	
+
 
 	const convertDate = (dateString: any) => {
 		const parts = dateString?.split("/");
@@ -188,7 +195,7 @@ export const CheckIn: FunctionComponent<({
 
 	const getData = async () => {
 		const rs = await DonDatApi.getPhongDat(props.id);
-	
+
 		console.log('getData', rs);
 
 		setListData(rs.data);
@@ -198,7 +205,7 @@ export const CheckIn: FunctionComponent<({
 		getData();
 	}, []);
 
-	return CheckInView({ listData, detailListData, myForm, selected, closeDialog, handleOpenGuest,getPhongDaChon, handleOpenDialog, postCheckIn, checkIn ,deleteKhach});
+	return CheckInView({ listData, detailListData, myForm, selected, closeDialog, handleOpenGuest, getPhongDaChon, handleOpenDialog, postCheckIn, checkIn, deleteKhach });
 };
 
 export default CheckIn;

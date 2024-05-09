@@ -3,6 +3,8 @@ import AddGuestView from "./AddGuest.view";
 import { FormBuilder, FormGroup, Validators } from "react-reactive-form";
 import { DonDatApi } from "src/common/api/DonDatApi";
 import { useDialog } from "src/common/services/dialog/Dialog.provider";
+import { Value } from "sass";
+import { ValidatorExtention } from "src/common/ValidatorExtention";
 
 export const AddGuest: FunctionComponent <({
 	
@@ -18,10 +20,10 @@ export const AddGuest: FunctionComponent <({
 		FormBuilder.group({
 			id: [props.idKhachO],
 			phongDatIdPhongDat: [props.idPhongDat],
-			hoTen: [null, Validators.required],
-			soGiayTo: [null, Validators.required],
-			tenGiayTo: [null, Validators.required],
-			quocTich: [null, Validators.required],
+			hoTen: ['', ValidatorExtention.required('Họ tên không được để trống')],
+			soGiayTo: ['', ValidatorExtention.required('Số giấy tờ không được để trống')],
+			tenGiayTo: ['', ValidatorExtention.required('Tên giấy tờ không được để trống')],
+			quocTich: ['', ValidatorExtention.required('Quóc tịch không được để trống')],
 		})
 	);
 
@@ -34,26 +36,20 @@ export const AddGuest: FunctionComponent <({
 		
 	}
 
-	
-
 	const save = async () => {
-		
+		debugger;
+		console.log(myForm.value)
 	
 		if(myForm.invalid) return;
 
-
 		if(props.idKhachO){
 			await DonDatApi.updateKhachO(props.idKhachO, myForm.value);
-
 			await dialogService.alert('Cập nhật thành công');
-		
-			
 		}else{
 			await DonDatApi.addKhachO(myForm.value);
 			await dialogService.alert('Thêm thành công');
-			
-			
 		}
+
 		closeDialog(); 
 
 	}

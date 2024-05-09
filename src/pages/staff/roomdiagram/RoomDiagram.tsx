@@ -4,12 +4,14 @@ import axios from "axios";
 import { useDialog } from "src/common/services/dialog/Dialog.provider";
 import { DialogSize } from "src/common/services/dialog/Dialog.service";
 import RoomDiagramDetail from "./roomdiagram-detail/RoomDiagramDetail";
+import { useLoading } from "src/common/services/loading/Loading.provider";
 
 export const RoomDiagram: FunctionComponent = (props: any) => {
 
     const { dialogService } = useDialog();
 
     const [isModalUpdateInfoGuest, setModalUpdateInfoGuest] = useState(false);
+    const { loadingService } = useLoading();
     const closeModalUpdateInfoGuest = () => {
         setModalUpdateInfoGuest(false);
     }
@@ -32,12 +34,14 @@ export const RoomDiagram: FunctionComponent = (props: any) => {
     // Fetch empty rooms
     const fetchEmptyRooms = async () => {
         try {
-
+            loadingService.openLoading();
             const response = await axios.get(apiEmptyRoom);
             // const decodedData1 = response.data.map((item) => ({
             //     id: decodeURIComponent(item.id),
             //     tenLoaiDichVu: decodeURIComponent(item.tenLoaiDichVu),
             // }));
+
+	    loadingService.closeLoading();
 
             setEmptyRooms(response.data);
         } catch (error) {
@@ -62,18 +66,18 @@ export const RoomDiagram: FunctionComponent = (props: any) => {
 
 
     const handleOpenDialog = (item: any) => {
-        console.log(props.idKhachO)
+        
         dialogService.openDialog(option => {
 
             option.size = DialogSize.medium;
-            option.content = (<RoomDiagramDetail idPhongDat={item.idPhongDat} idLoaiPhong={item.idLoaiPhong} onClose={(hasChange) => handleCloseDialog(hasChange)} />)
+            option.content = (<RoomDiagramDetail idDonDat={item.idDonDat} idPhongDat={item.idPhongDat} idLoaiPhong={item.idLoaiPhong} onClose={(hasChange) => handleCloseDialog(hasChange)} />)
 
         });  
         
         const handleCloseDialog = (hasChange: boolean) => {
             dialogService.closeDialog();
     
-            if (hasChange) {
+            if (!hasChange) {
                 fetchUsedRooms();
             }
         }
