@@ -9,7 +9,7 @@ export const RoomDiagramView = (props: any) => {
         <div className="layout-room-diagram">
         
             {/* statistic temp*/}
-          <h2 className="breadcrumb-title">Sơ đồ trạng thái phòng</h2>
+          <h2 className="breadcrumb-title">Sơ đồ trạng thái phòng hiện tại</h2>
 
             {/* filter */}
 

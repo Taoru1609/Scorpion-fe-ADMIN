@@ -75,7 +75,7 @@ export const ReservationView = (props: any) => {
 
 			</div>
 			<Content>
-			
+				<p>Tìm kiếm theo số điện thoại hoặc mã đặt phòng</p>
 					<FieldGroup
 						control={props.formSearch}
 						render={({ get, invalid }) => (

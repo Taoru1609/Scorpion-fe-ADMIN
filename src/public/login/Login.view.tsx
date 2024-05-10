@@ -1,14 +1,15 @@
-import React from "react";
 import "./Login.style.scss";
 import { FieldControl, FieldGroup } from "react-reactive-form";
 import InputText from "src/common/controls/InputText";
 import { PlusCircleOutlined } from "@ant-design/icons";
 import "./Login.style.scss";
 import InputPassword from "src/common/controls/InputPassword";
+import { message } from "antd";
 
 
 export const LoginView = (props: any) => {
   return (
+    
   <div className="form-login">
 
     <FieldGroup

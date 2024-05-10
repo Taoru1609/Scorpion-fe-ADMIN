@@ -28,24 +28,25 @@ export const Reservation: FunctionComponent = (props: any) => {
 
 	const getData = async () => {
 		if (formSearch.invalid) return;
-		//const formData = formSearch.getRawValue();
+
+		const formData = formSearch.getRawValue();
 
 		loadingService.openLoading();
-		const rs:any = await DonDatApi.getAll();
+		const rs:any = await DonDatApi.getAll({sdt: formData.q});
 		setListData(rs.data.map((x:any)=>{
+			
 			x.hoTen = x.thongTinKhachDatIdKhachDat.hoTen;
 			x.soDienThoai = x.thongTinKhachDatIdKhachDat.soDienThoai;
 			
 			return x;
 		}));
-		//setPaging(rs.paging);
+		// setPaging(rs.paging);
 		loadingService.closeLoading();
 
 	}
 
 	const handleSubmit = (e: any) => {
 		e.preventDefault();
-		// báo lỗi controll nếu lỗi
 		formSearch.markAllAsTouched();
 		if (formSearch.invalid) return;
 
@@ -65,7 +66,7 @@ export const Reservation: FunctionComponent = (props: any) => {
 
 	const handleCloseDialog = (hasChange: boolean) => {
 		dialogService.closeDialog();
-		if (hasChange) {
+		if (!hasChange) {
 			// có thay đổi dữ liệu refesh data tại trang hiện tại
 			getData();
 		}

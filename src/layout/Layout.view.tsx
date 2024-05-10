@@ -38,39 +38,85 @@ export const LayoutView = () => {
       const menuData = [
         {
           id: 1,
-          icon: 'isax-chart-square',
-          label: 'ADMIN',
+          icon: 'isax-clipboard-text1',
+          label: 'QUẢN LÝ',
           url: null,
           parent: null
         },
         {
           id: 2,
           icon: 'isax-document-text1',
-          label: 'LOẠI PHÒNG',
-          url: '/admin/roomtest',
+          label: 'Quản lý phòng',
+          url: null,
           parent: 1
         },
-       
+
+        {
+          id: 3,
+          icon: 'isax-document-text1',
+          label: 'Thông tin loại phòng',
+          url: '/admin/roomtype',
+          parent: 2
+        },
+        {
+          id: 4,
+          icon: 'isax-document-text1',
+          label: 'Danh sách phòng',
+          url: '/admin/roomlist',
+          parent: 2
+        },
         {
           id: 5,
           icon: 'isax-document-text1',
-          label: 'STAFF',
+          label: 'Thống kê',
+          url: '/admin/thongke',
+          parent: 1
+        },
+
+        {
+          id: 6,
+          icon: 'isax-document-text1',
+          label: 'Quản lý dịch vụ',
+          url: null,
+          parent: 1
+        },
+
+        {
+          id: 7,
+          icon: 'isax-document-text1',
+          label: 'Loại dịch vụ',
+          url: '/admin/qldichvu/loaidichvu',
+          parent: 6
+        },
+        {
+          id: 8,
+          icon: 'isax-document-text1',
+          label: 'Dịch vụ',
+          url: '/admin/qldichvu/dichvu',
+          parent: 6
+        },
+        
+       
+        {
+          id: 10,
+          icon: 'isax-document-text1',
+          label: 'GIAO DỊCH',
           url: null,
           parent: null
         },
         {
-          id: 6,
+          id: 11,
           icon: 'isax-clipboard-text1',
-          label: 'DANH SÁCH KHÁCH ĐẶT',
+          label: 'Danh sách đơn đặt',
           url: '/staff/reservation',
-          parent: 5,
+          parent: 10,
         },
         {
-          id: 7,
+          id: 12,
           icon: 'isax-chart-square',
-          label: 'SƠ ĐỒ TRẠNG THÁI PHÒNG HIỆN TẠI',
+          label: 'Sơ đồ trạng thái phòng hiện tại ',
           url: '/staff/roomdiagram',
-          parent: 5,
+          parent: 10,
         },
       ];
 

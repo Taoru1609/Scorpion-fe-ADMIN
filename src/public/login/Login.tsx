@@ -5,11 +5,16 @@ import { AuthHttp } from "src/common/api/AuthHttp";
 import { useNavigate } from "react-router-dom";
 import { useLoading } from "src/common/services/loading/Loading.provider";
 import { ValidatorExtention } from "src/common/ValidatorExtention";
+import { useDialog } from "src/common/services/dialog/Dialog.provider";
+import { message } from "antd";
 
 export const Login: FunctionComponent = (props: any) => {
 
 	const { loadingService } = useLoading();
 	const navigate = useNavigate();
+	const { dialogService } = useDialog();
+	const [messageApi, contextHolder] = message.useMessage();
+
 	
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
@@ -33,6 +38,7 @@ export const Login: FunctionComponent = (props: any) => {
 
 	const save = async (e: any) => {
 		// báo lỗi controll nếu lỗi
+
 		myForm.markAllAsTouched();
 
 		if (myForm.invalid) return;
@@ -40,24 +46,29 @@ export const Login: FunctionComponent = (props: any) => {
 		try {
 
 			const response = await AuthHttp.login(myForm.value);
+			debugger
 			if (response.status === 200) {
-				localStorage.setItem('idsUser', JSON.stringify(response.data))
-				navigate("/")
+				if(!response.data){
+					alert('Sai tài khoản hoặc mật khẩu')				
+					}else{
+					localStorage.setItem('idsUser', JSON.stringify(response.data))
+					navigate("/")
+				}
+				
 			}
 
 		} catch (error) {
+
 			console.log("error", error);
 		}
 
-		// let formData = myForm.getRawValue();
-
-		// call api
-		// localStorage.setItem('accessToken', new Date().toISOString())
+	
 		
 	}
 
 	useEffect(() => {
 		checkLogin();
+		
 		loadingService.closeLoading();
 	}, []);
 

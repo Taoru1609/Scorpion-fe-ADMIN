@@ -11,7 +11,6 @@ export const DichVu: FunctionComponent<({
 	onClose: (hasChange: boolean) => void
 })> = (props: any) => {
 
-	const [listData, setListData] = useState<any[]>([]);
 
 	const [listOption, setOption] = useState<any[]>([]);
 
@@ -20,6 +19,7 @@ export const DichVu: FunctionComponent<({
 	const [getTotal, setTotal] = useState<number>(0);
 
 	const { dialogService } = useDialog();
+	const [listData, setListData] = useState<any[]>([]);
 
 	const getData = async (id?: any) => {
 
@@ -37,7 +37,7 @@ export const DichVu: FunctionComponent<({
 
 	const getOption = async () => {
 
-		const rs = await DonDatApi.getAllDichVu();
+		const rs = await DonDatApi.getLoaiDichVu();
 		setOption(rs.data);
 
 
@@ -103,7 +103,7 @@ export const DichVu: FunctionComponent<({
       dichVuList: mapData
     } 
 
-    await DonDatApi.addDichVu(newData);
+    await DonDatApi.addDatDichVu(newData);
     await dialogService.alert('Lưu dịch vụ thành công');
     localStorage.removeItem("gioHangDv");
 		props.onClose(hasChange);
