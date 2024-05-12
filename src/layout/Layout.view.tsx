@@ -46,7 +46,7 @@ export const LayoutView = () => {
         {
           id: 2,
           icon: 'isax-document-text1',
-          label: 'Quản lý phòng',
+          label: 'Phòng',
           url: null,
           parent: 1
         },
@@ -76,24 +76,31 @@ export const LayoutView = () => {
         {
           id: 6,
           icon: 'isax-document-text1',
-          label: 'Quản lý dịch vụ',
+          label: 'Doanh thu',
+          url: '/admin/doanhthu',
+          parent: 1
+        },
+        {
+          id: 7,
+          icon: 'isax-document-text1',
+          label: 'Danh mục',
           url: null,
           parent: 1
         },
 
         {
-          id: 7,
+          id: 8,
           icon: 'isax-document-text1',
           label: 'Loại dịch vụ',
           url: '/admin/qldichvu/loaidichvu',
-          parent: 6
+          parent: 7
         },
         {
-          id: 8,
+          id: 9,
           icon: 'isax-document-text1',
           label: 'Dịch vụ',
           url: '/admin/qldichvu/dichvu',
-          parent: 6
+          parent: 7
         },
         
        

@@ -82,7 +82,7 @@ export const RoomDiagramDetailView = (props: any) => {
 			render: (item: any) => {
 				return <div>
 					<div className="btn-left">
-						<Button type="text" onClick={() => props.handleOpenGuest(item)}>
+						<Button type="text" onClick={() => props.handleOpenUpdateDichVu(item)}>
 							Sửa
 						</Button>
 					</div>
@@ -232,15 +232,6 @@ export const RoomDiagramDetailView = (props: any) => {
 					Trả phòng
 				</button >
 
-
-				<button
-
-					type="button"
-					className="btn btn-primary"
-					onClick={() => props.openCheckOut()}
-				>
-					Test Hóa đơn
-				</button >
 			</center>
 		</div>
 

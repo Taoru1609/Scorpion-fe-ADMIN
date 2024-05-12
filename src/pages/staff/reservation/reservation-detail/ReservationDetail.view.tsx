@@ -27,7 +27,6 @@ export const ReservationDetailView = (props: any) => {
 	return (
 		<div>
 			<DialogButtonClose onClick={() => props.closeDialog()} />
-			<h4></h4>
 			<hr />
 		
 			<Table dataSource={props.listData} columns={columns} pagination={false} ></Table> <br />
@@ -114,6 +113,14 @@ export const ReservationDetailView = (props: any) => {
 								<FieldControl
 									name="diaChi"
 									meta={{ label: "Địa chỉ" }}
+									render={InputText}
+								/>
+							</div>
+
+							<div className="col-md-4">
+								<FieldControl
+									name="ghiChu"
+									meta={{ label: "Ghi chú" }}
 									render={InputText}
 								/>
 							</div>

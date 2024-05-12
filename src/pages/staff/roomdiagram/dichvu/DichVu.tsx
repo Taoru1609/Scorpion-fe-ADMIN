@@ -3,6 +3,8 @@ import DichVuView from "./DichVu.view";
 import { useDataShare } from "src/common/services/data-share/DataShare.provider";
 import { DonDatApi } from "src/common/api/DonDatApi";
 import { useDialog } from "src/common/services/dialog/Dialog.provider";
+import UpdateDichVu from "./updateDichVu/UpdateDichVu";
+import { DialogSize } from "src/common/services/dialog/Dialog.service";
 
 export const DichVu: FunctionComponent<({
   idPhongDat: any,
@@ -42,6 +44,8 @@ export const DichVu: FunctionComponent<({
 
 
 	}
+
+	
 
 	const getItemGioHangDv = () => {
 		let gioHangDv = [];

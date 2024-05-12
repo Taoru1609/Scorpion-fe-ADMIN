@@ -1,7 +1,9 @@
 import { Table } from "antd";
 import React from "react";
+import ChartBarBasic from "src/common/controls/ChartBarBasic";
 
 export const ThongKeView = (props: any) => {
+
 	const columns = [
 		{
 			title: 'STT',
@@ -45,6 +47,7 @@ export const ThongKeView = (props: any) => {
 
 	
 	];
+    
 	return (<div>
 		
 		<div className="layout-room-diagram">
@@ -56,9 +59,9 @@ export const ThongKeView = (props: any) => {
 				</h2>
 				<hr />
 			
-				<Table dataSource={props.listData} columns={columns} pagination={{ pageSize: 8 }} ></Table> <br />
+				<Table dataSource={props.listData} columns={columns} pagination={{ pageSize: 7 }} ></Table> <br />
 
-
+				<ChartBarBasic type="bar" text={"Biểu đồ thống kê"} height={800} xData={props.xData} columnData={props.columnData} />
 			</div>
 		</div>
 	</div>);

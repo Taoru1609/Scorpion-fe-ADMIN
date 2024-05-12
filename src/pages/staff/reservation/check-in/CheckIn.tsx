@@ -202,6 +202,7 @@ export const CheckIn: FunctionComponent<({
 	}
 
 	useEffect(() => {
+		myForm.disable()
 		getData();
 	}, []);
 

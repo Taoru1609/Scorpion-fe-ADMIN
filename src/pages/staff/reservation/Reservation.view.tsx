@@ -71,7 +71,7 @@ export const ReservationView = (props: any) => {
 	return (
 		<div>
 			<div className="layout-room-diagram">
-			<h2 className="breadcrumb-title">Danh sách khách đặt</h2>
+			<h2 className="breadcrumb-title">Danh sách đơn đặt</h2>
 
 			</div>
 			<Content>

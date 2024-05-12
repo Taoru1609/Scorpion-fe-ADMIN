@@ -1,3 +1,4 @@
+import { render } from "@testing-library/react";
 import { Button, Select, Table } from "antd";
 import React from "react";
 
@@ -26,7 +27,9 @@ export const RoomListView = (props: any) => {
 		{
 			title: 'Tên loại phòng',
 
-			dataIndex: 'tenLoaiPhong',
+			render (text:any , record:any){
+				return record.loaiPhongIdLoaiPhong?.tenLoaiPhong
+			},
 			key: 'tenLoaiPhong',
 
 		},
@@ -43,7 +46,7 @@ export const RoomListView = (props: any) => {
 						</Button>
 					</div>
 					<div className="btn-left">
-						<Button type="text" onClick={() => props.deleteLoaiDichVu(item)}>
+						<Button type="text" onClick={() => props.deletePhong(item)}>
 							Xóa
 						</Button>
 					</div>
@@ -77,7 +80,7 @@ export const RoomListView = (props: any) => {
 					style={{ width: "100%" }}
 					onChange={(event) => props.chonDichVu(event)}
 					options={props.listOption}
-				
+					defaultValue={null}
 				/>
 
 				<hr />

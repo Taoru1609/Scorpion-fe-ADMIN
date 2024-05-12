@@ -4,6 +4,7 @@ import ThongKe from "./thongke/ThongKe";
 import DichVu from "./qldichvu/dichvu/DichVu";
 import LoaiDichVu from "./qldichvu/loaidichvu/LoaiDichVu";
 import RoomList from "./roomlist/RoomList";
+import DoanhThu from "./doanhthu/DoanhThu";
 
 const AdminRouters: RouteObject = {
   path: "/admin",
@@ -25,6 +26,11 @@ const AdminRouters: RouteObject = {
       path: "thongke",
       index: true,
       element: <ThongKe/>,
+    },
+    {
+      path: "doanhthu",
+      index: true,
+      element: <DoanhThu/>,
     },
     {
       path: "qldichvu/dichvu",

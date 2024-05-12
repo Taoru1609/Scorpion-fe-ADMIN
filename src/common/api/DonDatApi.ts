@@ -72,6 +72,11 @@ export class DonDatApi extends HttpClient {
 
     public static deleteDichVu<T = any>(id: any) {
         return axios.delete<T>(`${this.baseApi}/admin/dich-vu-dat/delete/${id}`);
+
+    }
+
+    public static updateDatDichVu<T = any>(body: any) {
+        return axios.post<T>(`${this.baseApi}/admin/dich-vu-dat/sua`, body);
     }
     //api hóa  đơn phòng
     public static getHoaDon<T = any>(id: any) {
@@ -160,5 +165,30 @@ export class DonDatApi extends HttpClient {
     public static locPhong<T = any>(id: any) {
 
         return axios.get<T>(`${this.baseApi}/admin/phong/loc/${id ? ('?id=' + id) : ''}`);
+    }
+
+    public static addPhong<T = any>(body: any) {
+        return axios.post<T>(`${this.baseApi}/admin/phong/add`, body);
+    }
+    
+    public static detailPhong<T = any>(id: any) {
+        return axios.get<T>(`${this.baseApi}/admin/phong/detail/${id}`);
+    }
+
+    public static deletePhong<T = any>(id: any) {
+        return axios.delete<T>(`${this.baseApi}/admin/phong/xoa/${id}`);
+    }
+
+    public static updatePhong<T = any>(body: any) {
+        return axios.put<T>(`${this.baseApi}/admin/phong/sua`, body);
+    }
+
+
+    
+    //api doanh thu
+
+    public static locDoanhThu<T = any>(id: any) {
+
+        return axios.get<T>(`${this.baseApi}/admin/thong-ke/thong-ke-doanh-thu/${id}`);
     }
 }

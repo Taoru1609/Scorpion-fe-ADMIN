@@ -29,7 +29,9 @@ export const ReservationDetail: FunctionComponent<({
 			email: [null, Validators.required],
 			quocTich: [null, Validators.required],
 			gioiTinh: [null, Validators.required],
-			diaChi: [null, Validators.required]
+			diaChi: [null, Validators.required],
+			ghiChu: [null, Validators.required]
+
 		})
 	);
 
@@ -57,7 +59,9 @@ export const ReservationDetail: FunctionComponent<({
 			email: data.email,
 			quocTich: data.quocTich,
 			gioiTinh: data.gioiTinh,
-			diaChi: data.diaChi
+			diaChi: data.diaChi,
+			ghiChu: data.ghiChu
+
 		})
 	}
 

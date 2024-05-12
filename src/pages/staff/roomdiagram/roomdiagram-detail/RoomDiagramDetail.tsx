@@ -12,6 +12,7 @@ import { useDataShare } from "src/common/services/data-share/DataShare.provider"
 import { message } from "antd";
 import HoaDon from "../hoadon/HoaDon";
 import DichVu from "../dichvu/DichVu";
+import UpdateDichVu from "../dichvu/updateDichVu/UpdateDichVu";
 
 export const RoomDiagramDetail: FunctionComponent<({
 	idDichVuDat?: any,
@@ -75,28 +76,26 @@ export const RoomDiagramDetail: FunctionComponent<({
 
 	}
 
+	//handle update dịch vụ
+	const handleOpenUpdateDichVu = (item: any) => {
 
-	const openCheckOut = () => {
-		// gan phong
 		dialogService.openDialog(option => {
-			option.size = DialogSize.medium;
-			option.content = (<HoaDon idDonDat={props.idDonDat} idPhongDat={props.idPhongDat} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
-		});
-		
 
+			option.size = DialogSize.small;
+			option.content = (<UpdateDichVu item={item } onClose={(hasChange) => handleCloseDialog(hasChange)} />)
+
+		});
 
 		const handleCloseDialog = (hasChange: boolean) => {
-			
-
 			dialogService.closeDialog();
 
 			if (!hasChange) {
-				// refesh data
 				getData();
 			}
-
 		}
 	}
+
+
 	const handleCloseDialogHoaDon = (hasChange: boolean) => {
 		dialogService.closeDialog();
 
@@ -115,7 +114,7 @@ export const RoomDiagramDetail: FunctionComponent<({
 
 	//mở trang lưu phòng
 	const handleOpenDialog = () => {
-	
+
 
 		// gan phong
 		dialogService.openDialog(option => {
@@ -126,7 +125,7 @@ export const RoomDiagramDetail: FunctionComponent<({
 
 
 		const handleCloseDialog = (hasChange: boolean) => {
-	
+
 
 			dialogService.closeDialog();
 
@@ -144,7 +143,7 @@ export const RoomDiagramDetail: FunctionComponent<({
 
 	//Handle mở trang dịch vụ
 	const handleOpenDialogDichVu = () => {
-	
+
 
 		// gan phong
 		dialogService.openDialog(option => {
@@ -155,7 +154,7 @@ export const RoomDiagramDetail: FunctionComponent<({
 	}
 
 	const handleCloseDialogDichVu = (hasChange: boolean) => {
-		
+
 
 		dialogService.closeDialog();
 		if (!hasChange) {
@@ -175,7 +174,7 @@ export const RoomDiagramDetail: FunctionComponent<({
 
 	//mở trang thêm khách
 	const handleOpenGuest = (item?: any) => {
-		
+
 
 		let idKhachO: any;
 
@@ -192,9 +191,9 @@ export const RoomDiagramDetail: FunctionComponent<({
 			option.size = DialogSize.small;
 			option.content = (<AddGuest idPhongDat={myForm.get('idPhongDat').value} idKhachO={idKhachO} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
 		});
-	
+
 		const handleCloseDialog = (hasChange: boolean) => {
-		
+
 
 			dialogService.closeDialog();
 
@@ -210,7 +209,7 @@ export const RoomDiagramDetail: FunctionComponent<({
 	const deleteKhach = async (item?: any) => {
 
 		const result = await dialogService.confirm('Bạn có chắc chắn muốn xóa không?');
-		if(!result){
+		if (!result) {
 			return;
 		}
 
@@ -231,7 +230,7 @@ export const RoomDiagramDetail: FunctionComponent<({
 	//Xóa dịch vụ
 	const handleDeleteDichVu = async (item?: any) => {
 		const result = await dialogService.confirm('Bạn có chắc chắn muốn xóa không?');
-		if(!result){
+		if (!result) {
 			return;
 		}
 		if (item.idDichVuDat) {
@@ -285,7 +284,7 @@ export const RoomDiagramDetail: FunctionComponent<({
 		getData();
 	}, []);
 
-	return RoomDiagramDetailView({ detailData, listDataDV,openCheckOut, handleDeleteDichVu, deleteKhach, handleOpenGuest, handleOpenDialogDichVu, handleCloseDialogHoaDon, formatNumber, handleCloseDialog, handleOpenDialog, postCheckOut, myForm, getData });
+	return RoomDiagramDetailView({ detailData, listDataDV, handleOpenUpdateDichVu, handleDeleteDichVu, deleteKhach, handleOpenGuest, handleOpenDialogDichVu, handleCloseDialogHoaDon, formatNumber, handleCloseDialog, handleOpenDialog, postCheckOut, myForm, getData });
 };
 
 export default RoomDiagramDetail;

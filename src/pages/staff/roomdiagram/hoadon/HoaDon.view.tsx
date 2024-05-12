@@ -150,13 +150,7 @@ export const HoaDonView = (props: any) => {
 			<center>
 
 				<div className="list-control-search">
-					<button
-						type="button"
-						className="btn btn-default"
-						onClick={() => props.closeDialog()} >
-
-						{props.mode === "view" ? "Đóng" : "Đóng"}
-					</button>
+				
 
 					<button
 						type="button"

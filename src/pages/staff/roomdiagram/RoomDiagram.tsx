@@ -88,6 +88,7 @@ export const RoomDiagram: FunctionComponent = (props: any) => {
         // Call functions to fetch data
         fetchEmptyRooms();
         fetchUsedRooms();
+        
 
     }, []);
 
