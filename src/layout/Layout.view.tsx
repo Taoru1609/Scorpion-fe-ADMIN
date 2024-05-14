@@ -67,7 +67,7 @@ export const LayoutView = () => {
         },
         {
           id: 5,
-          icon: 'isax-document-text1',
+          icon: 'isax-chart-square',
           label: 'Thống kê',
           url: '/admin/thongke',
           parent: 1
@@ -75,7 +75,7 @@ export const LayoutView = () => {
 
         {
           id: 6,
-          icon: 'isax-document-text1',
+          icon: 'isax-chart-square',
           label: 'Doanh thu',
           url: '/admin/doanhthu',
           parent: 1

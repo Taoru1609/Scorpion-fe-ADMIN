@@ -160,12 +160,15 @@ export const HoaDonView = (props: any) => {
 						{props.mode === "view" ? "Thanh toán" : "Thanh toán"}
 					</button>
 
+				
 					<button
 						type="button"
 						className="btn btn-primary"
+						disabled={props.HoaDon}
 						onClick={() => props.inHoaDon()} >
 
 						{props.mode === "view" ? "In hóa đơn" : "In hóa đơn"}
+						
 					</button>
 				</div>
 

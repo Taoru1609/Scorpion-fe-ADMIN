@@ -5,6 +5,7 @@ import { DonDatApi } from "src/common/api/DonDatApi";
 import { useDialog } from "src/common/services/dialog/Dialog.provider";
 import { DialogSize } from "src/common/services/dialog/Dialog.service";
 import { useNavigate } from "react-router-dom";
+import { async } from "rxjs";
 
 export const HoaDon: FunctionComponent<({
 	idDonDat: any,
@@ -17,6 +18,8 @@ export const HoaDon: FunctionComponent<({
 	const [detailDataHt, setdetailDataHt] = useState<any>();
 	const [idHinhThuc, setIdHinhThuc] = useState<number | null>(null);
 	const [selected, setSelected] = useState(false);
+	const [HoaDon, setHoaDon] = useState(true);
+
 
 
 
@@ -66,25 +69,29 @@ export const HoaDon: FunctionComponent<({
 			dialogService.alert('Vui lòng chọn phương thức thanh toán trước');
 			return;
 		}
-		await DonDatApi.addHoaDon({
-			phongDatIdPhongDat: {
-				id: props.idPhongDat,
-			},
+		try {
+			await DonDatApi.addHoaDon({
+				phongDatIdPhongDat: {
+					id: props.idPhongDat,
+				},
 
-			hinhThucThanhToanIdHinhThuc: {
-				id: idHinhThuc,
-			},
-			tienThanhToan: detailData[0].tongTien
+				hinhThucThanhToanIdHinhThuc: {
+					id: idHinhThuc,
+				},
+				tienThanhToan: detailData[0].tongTien
 
-		});
+			});
+			await dialogService.alert('Thanh toán thành công');
+			setHoaDon(false);
+			
 
+		} catch (error) {
 
-		await dialogService.alert('Thanh toán thành công');
-
-
+		}
 
 
 	}
+
 
 	const chonPhong = (event: number) => {
 		debugger;
@@ -95,9 +102,12 @@ export const HoaDon: FunctionComponent<({
 	}
 
 
-	const inHoaDon = () => {
-
-		window.open('/public/inhoadon?idHoaDon='+props.idPhongDat,'_blank');
+	const inHoaDon = async () => {
+		const result = await dialogService.confirm('Bạn có chắc chắn muốn in hóa đơn không?');
+		if (!result) {
+			return;
+		}
+		window.open('/public/inhoadon?idHoaDon=' + props.idPhongDat, '_blank');
 		closeDialog();
 		window.location.reload();
 	}
@@ -133,7 +143,7 @@ export const HoaDon: FunctionComponent<({
 	}, []);
 
 
-	return HoaDonView({ closeDialog, formatNumber, detailDataHt, selected, chonPhong, detailData, handleAddHoaDon,inHoaDon });
+	return HoaDonView({ closeDialog, formatNumber, HoaDon,detailDataHt, selected, chonPhong, detailData, handleAddHoaDon, inHoaDon });
 };
 
 export default HoaDon;
