@@ -49,7 +49,7 @@ export const ReservationView = (props: any) => {
 				return <div>
 
 					{
-						item.tenPhong !== null && item.trangThai !== "HUY" &&  (
+						item.tenPhong !== null && item.trangThai !== "HUY DON DAT" &&  (
 							<div>
 					<Button type="text" onClick={() => clickEdit(item)}>
 						{<EditOutlined />}

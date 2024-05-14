@@ -13,9 +13,10 @@ export const Login: FunctionComponent = (props: any) => {
 	const { loadingService } = useLoading();
 	const navigate = useNavigate();
 	const { dialogService } = useDialog();
-	const [messageApi, contextHolder] = message.useMessage();
 
-	
+	const [messageApi] = message.useMessage();
+
+
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
 			soDienThoai: ['', ValidatorExtention.required('Tài khoản không được để trống')],
@@ -24,17 +25,17 @@ export const Login: FunctionComponent = (props: any) => {
 	);
 
 	const checkLogin = () => {
-		let idsUser:any;
-			let idsUserStore = localStorage.getItem("idsUser");
-			if(idsUserStore){
-				idsUser = JSON.parse(idsUserStore);
-			}
-	
-		if(idsUser){
-		  navigate("/");
+		let idsUser: any;
+		let idsUserStore = localStorage.getItem("idsUser");
+		if (idsUserStore) {
+			idsUser = JSON.parse(idsUserStore);
 		}
-	
-	  }
+
+		if (idsUser) {
+			navigate("/");
+		}
+
+	}
 
 	const save = async (e: any) => {
 		// báo lỗi controll nếu lỗi
@@ -42,19 +43,21 @@ export const Login: FunctionComponent = (props: any) => {
 		myForm.markAllAsTouched();
 
 		if (myForm.invalid) return;
-		
+
 		try {
 
 			const response = await AuthHttp.login(myForm.value);
 			debugger
 			if (response.status === 200) {
-				if(!response.data){
-					alert('Sai tài khoản hoặc mật khẩu')				
-					}else{
+				if (!response.data) {
+					dialogService.alert('Sai tài khoản hoặc mật khẩu');
+
+
+				} else {
 					localStorage.setItem('idsUser', JSON.stringify(response.data))
 					navigate("/")
 				}
-				
+
 			}
 
 		} catch (error) {
@@ -62,17 +65,17 @@ export const Login: FunctionComponent = (props: any) => {
 			console.log("error", error);
 		}
 
-	
-		
+
+
 	}
 
 	useEffect(() => {
 		checkLogin();
-		
+
 		loadingService.closeLoading();
 	}, []);
 
-	return LoginView({ myForm, save });
+	return LoginView({ myForm, save  });
 };
 
 export default Login;

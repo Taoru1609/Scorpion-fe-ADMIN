@@ -156,11 +156,20 @@ export const RoomDiagramDetailView = (props: any) => {
 
 								<button
 									type="button"
-									className=" btn btn-primary  "
+									className=" btn btn-custom btn-primary  "
 
 									onClick={() => props.handleOpenDialog()}
 								>
 									Đổi phòng
+								</button >
+
+								<button
+									type="button"
+									className=" btn  btn-primary  "
+
+									onClick={() => props.handleGiaHanPhong()}
+								>
+									Gia hạn phòng
 								</button >
 
 							</div></center>

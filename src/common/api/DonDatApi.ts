@@ -1,3 +1,4 @@
+import { GiaHanPhong } from './../../pages/staff/roomdiagram/roomdiagram-detail/giahanphong/GiaHanPhong';
 import axios from "axios";
 import { HttpClient } from "./HttpClient";
 
@@ -43,8 +44,8 @@ export class DonDatApi extends HttpClient {
     }
 
 //api khách ở
-    public static addKhachO<T = any>(body: any) {
-        return axios.post<T>(`${this.baseApi}/admin/khach-hang-o/add`, body);
+    public static addKhachO<T = any>(id: any , body : any) {
+        return axios.post<T>(`${this.baseApi}/admin/khach-hang-o/add/?idDonDat=${id}`, body);
     }
 
     public static updateKhachO<T = any>(id: any, body: any) {
@@ -191,4 +192,53 @@ export class DonDatApi extends HttpClient {
 
         return axios.get<T>(`${this.baseApi}/admin/thong-ke/thong-ke-doanh-thu/${id}`);
     }
+
+    //api tài khoản
+    public static getAllTaiKhoan<T = any>() {
+
+        return axios.get<T>(`${this.baseApi}/admin/hien-thi-list`);
+    }
+
+    public static addTaiKhoan<T = any>(body: any) {
+        return axios.post<T>(`${this.baseApi}/admin/add`, body);
+    }
+
+    public static detailTaiKhoan<T = any>(id: any) {
+        return axios.get<T>(`${this.baseApi}/admin/detail/${id}`);
+    }
+
+    public static updateTaiKhoan<T = any>(body: any) {
+        return axios.post<T>(`${this.baseApi}/admin/update`, body);
+    }
+
+    
+    public static deleteTaiKhoan<T = any>(id: any) {
+        return axios.delete<T>(`${this.baseApi}/admin/delete/${id}`);
+    }
+
+
+    //api hình ảnh
+    public static detailHinhAnh<T = any>(id: any) {
+        return axios.get<T>(`${this.baseApi}/admin/hinh-anh/detail/${id}`);
+    }
+
+    public static addHinhAnh<T = any>(body: any, option: any) {
+        return axios.post<T>(`${this.baseApi}/admin/hinh-anh/add`, body, option);
+    }
+
+    public static deleteHinhAnh<T = any>(id: any) {
+        return axios.delete<T>(`${this.baseApi}/admin/hinh-anh/delete/${id}`);
+    }
+
+    //api hủy phòng
+    public static huyPhong<T = any>(id : any) {
+        return axios.post<T>(`${this.baseApi}/staff/don-dat/update/${id}`);
+    }
+    
+
+    //api gia hạn phòng
+    public static giaHanPhong<T = any>(body : any) {
+        return axios.post<T>(`${this.baseApi}/phong-dat/update`, body);
+    }
+
 }

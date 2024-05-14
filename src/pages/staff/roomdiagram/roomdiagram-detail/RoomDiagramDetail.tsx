@@ -13,6 +13,7 @@ import { message } from "antd";
 import HoaDon from "../hoadon/HoaDon";
 import DichVu from "../dichvu/DichVu";
 import UpdateDichVu from "../dichvu/updateDichVu/UpdateDichVu";
+import GiaHanPhong from "./giahanphong/GiaHanPhong";
 
 export const RoomDiagramDetail: FunctionComponent<({
 	idDichVuDat?: any,
@@ -174,8 +175,8 @@ export const RoomDiagramDetail: FunctionComponent<({
 
 	//mở trang thêm khách
 	const handleOpenGuest = (item?: any) => {
-
-
+		debugger
+		console.log(myForm.get('idDonDat').value)
 		let idKhachO: any;
 
 
@@ -187,13 +188,37 @@ export const RoomDiagramDetail: FunctionComponent<({
 
 		// gan phong
 		dialogService.openDialog(option => {
+			
 			option.title = 'Thông tin khách ';
 			option.size = DialogSize.small;
-			option.content = (<AddGuest idPhongDat={myForm.get('idPhongDat').value} idKhachO={idKhachO} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
+			option.content = (<AddGuest idPhongDat={myForm.get('idPhongDat').value} idDonDat={myForm.get('idDonDat').value} idKhachO={idKhachO} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
 		});
 
 		const handleCloseDialog = (hasChange: boolean) => {
 
+
+			dialogService.closeDialog();
+
+			if (!hasChange) {
+				// refesh data
+				getData();
+			}
+
+		}
+	}
+
+	//mở trang gia hạn phòng
+
+	const handleGiaHanPhong = (item?: any) => {
+
+		// gan phong
+		dialogService.openDialog(option => {
+			
+			option.title = 'Gia hạn phòng ';
+			option.size = DialogSize.small;
+			option.content = (<GiaHanPhong idPhongDat={myForm.get('idPhongDat').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
+		});
+		const handleCloseDialog = (hasChange: boolean) => {
 
 			dialogService.closeDialog();
 
@@ -279,12 +304,12 @@ export const RoomDiagramDetail: FunctionComponent<({
 		dataShareService.setValue('hasChange01', false);
 		dataShareService.setValue('hasChange03', false);
 
-
+		myForm.disable();
 
 		getData();
 	}, []);
 
-	return RoomDiagramDetailView({ detailData, listDataDV, handleOpenUpdateDichVu, handleDeleteDichVu, deleteKhach, handleOpenGuest, handleOpenDialogDichVu, handleCloseDialogHoaDon, formatNumber, handleCloseDialog, handleOpenDialog, postCheckOut, myForm, getData });
+	return RoomDiagramDetailView({ detailData, listDataDV, handleOpenUpdateDichVu, handleDeleteDichVu, deleteKhach, handleOpenGuest,handleGiaHanPhong, handleOpenDialogDichVu, handleCloseDialogHoaDon, formatNumber, handleCloseDialog, handleOpenDialog, postCheckOut, myForm, getData });
 };
 
 export default RoomDiagramDetail;

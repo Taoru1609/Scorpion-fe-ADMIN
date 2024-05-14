@@ -39,11 +39,11 @@ export const DichVuView = (props: any) => {
 							Sửa
 						</Button>
 					</div>
-					<div className="btn-left">
+					{/* <div className="btn-left">
 						<Button type="text" onClick={() => props.deleteLoaiDichVu(item)}>
 							Xóa
 						</Button>
-					</div>
+					</div> */}
 
 				</div>
 			}
@@ -73,7 +73,7 @@ export const DichVuView = (props: any) => {
 					style={{ width: "100%" }}
 					onChange={(event) => props.chonDichVu(event)}
 					options={props.listOption}
-				
+					defaultValue={null}
 				/>
 
 				<hr />

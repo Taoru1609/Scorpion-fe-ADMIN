@@ -103,27 +103,34 @@ export const LayoutView = () => {
           parent: 7
         },
         
-       
         {
           id: 10,
+          icon: 'isax-document-text1',
+          label: 'Tài khoản',
+          url: '/admin/taikhoanadmin',
+          parent: 1
+        },
+       
+        {
+          id: 11,
           icon: 'isax-document-text1',
           label: 'GIAO DỊCH',
           url: null,
           parent: null
         },
         {
-          id: 11,
+          id: 12,
           icon: 'isax-clipboard-text1',
           label: 'Danh sách đơn đặt',
           url: '/staff/reservation',
-          parent: 10,
+          parent: 11,
         },
         {
-          id: 12,
+          id: 13,
           icon: 'isax-chart-square',
           label: 'Sơ đồ trạng thái phòng hiện tại ',
           url: '/staff/roomdiagram',
-          parent: 10,
+          parent: 11,
         },
       ];
 

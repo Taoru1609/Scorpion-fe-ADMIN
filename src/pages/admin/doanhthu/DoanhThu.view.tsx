@@ -29,6 +29,11 @@ export const DoanhThuView = (props: any) => {
 
   return (<div>
     <div className="layout-room-diagram" style={{paddingRight: "2rem"}}>
+    <h2 className="breadcrumb-title">
+					Doanh thu
+				</h2>
+		
+  
       <label>Lọc doanh thu theo : </label>
       <Select
         fieldNames={{ label: 'text', value: 'value' }}

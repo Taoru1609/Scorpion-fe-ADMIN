@@ -5,6 +5,7 @@ import { useDialog } from "src/common/services/dialog/Dialog.provider";
 import { DialogSize } from "src/common/services/dialog/Dialog.service";
 import AddRoomType from "../addroomtype/AddRoomType";
 import { useLoading } from "src/common/services/loading/Loading.provider";
+import HinhAnh from "./hinhanh/HinhAnh";
 
 export const RoomType: FunctionComponent  = (props: any) => {
 
@@ -37,6 +38,27 @@ export const RoomType: FunctionComponent  = (props: any) => {
 		}
 	}
 
+	const handleOpenHinhAnh = ( item: any) => {
+		console.log(item)
+		// gan phong
+		dialogService.openDialog(option => {
+
+			
+			option.size = DialogSize.medium;
+			option.content = (<HinhAnh idLoaiPhong ={item?.id} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
+		});
+
+
+		const handleCloseDialog = (hasChange: boolean) => {
+			dialogService.closeDialog();
+
+			if (!hasChange) {
+				getData();
+			}
+			//closeDialog();
+		}
+	}
+
 	
 
 	const deleteLoaiPhong = async (item?: any) => {
@@ -44,18 +66,20 @@ export const RoomType: FunctionComponent  = (props: any) => {
 		if (!result) {
 			return;
 		}
-		if (item.id) {
-			loadingService.openLoading();
-			
-			await DonDatApi.deleteLoaiPhong(item.id);
-			// refesh data
-			
 
-			loadingService.closeLoading();
-
-			await dialogService.alert('Xóa thành công');
-			await getData();
+		try {
+			if (item.id) {
+				
+				await DonDatApi.deleteLoaiPhong(item.id);
+				// refesh data
+				await dialogService.alert('Xóa thành công');
+				await getData();
+				
+			}
+		} catch (error: any) {
+				dialogService.alert(error.response.data)
 		}
+		
 	}
 
 	const getData = async () => {
@@ -78,7 +102,7 @@ export const RoomType: FunctionComponent  = (props: any) => {
 		getData();
 	}, []);
 
-	return RoomTypeView({listData , closeDialog ,handleOpenDialog, formatNumber, deleteLoaiPhong});
+	return RoomTypeView({listData , closeDialog ,handleOpenDialog, formatNumber, deleteLoaiPhong, handleOpenHinhAnh});
 	
 };
 

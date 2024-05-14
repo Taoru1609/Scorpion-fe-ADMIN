@@ -8,12 +8,12 @@ import AddRoomList from "./addroomlist/AddRoomList";
 
 export const RoomList: FunctionComponent = (props: any) => {
 
-	const [listData, setListData] = useState<any[]>([]);
+
 	const [listOption, setOption] = useState<any[]>([]);
 	const { dialogService } = useDialog();
 	const { loadingService } = useLoading();
 
-
+	const [listData, setListData] = useState<any[]>([]);
 	const getData = async (id?: any) => {
 		
 		loadingService.openLoading();
@@ -61,18 +61,24 @@ export const RoomList: FunctionComponent = (props: any) => {
 		if (!result) {
 			return;
 		}
-		if (item.id) {
-			loadingService.openLoading();
+		try {
+				if (item.id) {
+			// loadingService.openLoading();
 			
 			await DonDatApi.deletePhong(item.id);
 			// refesh data
 			
 
-			loadingService.closeLoading();
+			// loadingService.closeLoading();
 
 			await dialogService.alert('Xóa thành công');
 			await getData();
 		}
+		} catch (error: any) {
+			dialogService.alert(error.response.data)
+
+		}
+	
 	}
 	const chonDichVu = (id: any) => {
 		getData(id)

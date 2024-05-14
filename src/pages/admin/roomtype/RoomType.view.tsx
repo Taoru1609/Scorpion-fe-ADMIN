@@ -63,6 +63,28 @@ export const RoomTypeView = (props: any) => {
 			}
 		},
 
+		{
+			title: 'Ảnh',
+			render: (item: any) => {
+				return <div>
+					
+					
+							<div className="btn-left">
+								<button
+									type="button"
+									className="btn btn-primary"
+									onClick={() => props.handleOpenHinhAnh(item)}
+								>
+									Ảnh
+								</button >
+							</div>
+					
+
+				</div>
+			}
+		},
+
+
 	];
 	return (
 		<div className="layout-room-diagram">

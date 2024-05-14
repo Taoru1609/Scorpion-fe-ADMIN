@@ -41,8 +41,17 @@ export const DichVu: FunctionComponent = (props: any) => {
 
 	const getOption = async () => {
 
+		
 		const rs = await DonDatApi.getLoaiDichVu();
-		setOption(rs.data);
+		let newOption = [
+			{
+				tenLoaiDichVu: "Tất cả",
+				id: null
+			},
+			...rs.data
+		];
+
+		setOption(newOption);
 
 
 	}

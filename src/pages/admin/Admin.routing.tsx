@@ -5,6 +5,7 @@ import DichVu from "./qldichvu/dichvu/DichVu";
 import LoaiDichVu from "./qldichvu/loaidichvu/LoaiDichVu";
 import RoomList from "./roomlist/RoomList";
 import DoanhThu from "./doanhthu/DoanhThu";
+import TaiKhoanAdmin from "./taikhoanadmin/TaiKhoanAdmin";
 
 const AdminRouters: RouteObject = {
   path: "/admin",
@@ -38,6 +39,11 @@ const AdminRouters: RouteObject = {
       element: <DichVu/>,
     },
     
+    {
+      path: "taikhoanadmin",
+      index: true,
+      element: <TaiKhoanAdmin/>,
+    },
     {
       path: "qldichvu/loaidichvu",
       index: true,

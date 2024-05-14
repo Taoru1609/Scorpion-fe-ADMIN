@@ -56,11 +56,13 @@ export const Reservation: FunctionComponent = (props: any) => {
 	}
 
 	const handleOpenDialog = (mode: string = 'add', item: any = null) => {
+
+		
 		dialogService.openDialog(option => {
 			option.title = mode === 'view' ? 'Thông tin phòng đặt' : 'Thêm dữ liệu';
 			if (mode === 'edit') option.title = 'Sửa dữ liệu';
 			option.size = DialogSize.tab;
-			option.content = (<ReservationDetail id={item.id} mode={mode} onClose={(event) => handleCloseDialog(event)} />)
+			option.content = (<ReservationDetail id={item.id}  trangThai={item.trangThai}  mode={mode} onClose={(event) => handleCloseDialog(event)} />)
 		});
 	}
 

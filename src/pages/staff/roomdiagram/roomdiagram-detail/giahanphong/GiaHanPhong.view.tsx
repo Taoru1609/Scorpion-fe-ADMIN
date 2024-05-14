@@ -1,54 +1,27 @@
 import { CloseCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import React from "react";
 import { FieldControl, FieldGroup } from "react-reactive-form";
-import InputText from "src/common/controls/InputText";
+import InputDate from "src/common/controls/InputDate";
 
-export const AddGuestView = (props: any) => {
-	return (
-		<div>
-			<center>
-				{props.contextHolder}
-			</center>
-
-			<FieldGroup
+export const GiaHanPhongView = (props: any) => {
+	return (<div>
+		
+		<FieldGroup
 				control={props.myForm}
 				render={({ get, invalid }) => (
 					<form>
 
 						<div >
 							<FieldControl
-								name="hoTen"
-								meta={{ label: "Họ và tên" }}
-								render={InputText}
-							/>
-						</div>
-
-						<div >
-							<FieldControl
-								name="soGiayTo"
-								meta={{ label: "Số giấy tờ" }}
-								render={InputText}
+								name="thoiGianRa"
+								meta={{ label: "Thời gian ra" }}
+								
+								render={InputDate}
 							/>
 						</div>
 
 
-						<div >
-							<FieldControl
-								name="tenGiayTo"
-								meta={{ label: "Tên giấy tờ" }}
-								render={InputText}
-							/>
-						</div>
-
-
-						<div >
-							<FieldControl
-								name="quocTich"
-								meta={{ label: "Quốc tịch" }}
-								render={InputText}
-							/>
-						</div>
-
+					
 						<div className="list-control-search">
 							<button
 								type="button"
@@ -72,7 +45,7 @@ export const AddGuestView = (props: any) => {
 					</form >
 				)}
 			/>
-		</div>);
+	</div>);
 }
 
-export default AddGuestView;
+export default GiaHanPhongView;

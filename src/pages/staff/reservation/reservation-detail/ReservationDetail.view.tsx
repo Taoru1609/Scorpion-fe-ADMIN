@@ -141,6 +141,20 @@ export const ReservationDetailView = (props: any) => {
 							>
 								<PlusCircleOutlined className="mr-2" />Check In
 							</button >
+
+							{props.getStatus === 'THANH CONG' ?
+								<button
+								type="button"
+								className="btn btn-danger"
+								onClick={() => props.huyPhong()}
+							>
+								Hủy phòng
+							</button >
+							: 
+							null
+						}
+
+						
 						</div >
 					</form >
 				)}

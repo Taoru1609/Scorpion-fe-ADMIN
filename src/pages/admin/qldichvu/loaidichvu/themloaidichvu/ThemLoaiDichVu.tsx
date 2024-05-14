@@ -36,7 +36,6 @@ export const ThemLoaiDichVu: FunctionComponent<({
 		
 	}
 	const saveLoaiDichVu = async () => {
-debugger
 		if(myForm.invalid) return;
 
 		if(props.idLoaiDichVu){

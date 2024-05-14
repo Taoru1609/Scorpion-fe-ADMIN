@@ -11,6 +11,7 @@ import { useLoading } from "src/common/services/loading/Loading.provider";
 
 export const CheckIn: FunctionComponent<({
 	id?: string,
+	trangThai?: any
 	onClose: (hasChange: boolean) => void
 })> = (props) => {
 
@@ -28,8 +29,13 @@ export const CheckIn: FunctionComponent<({
 
 	const [hasChange, setHasChange] = useState<boolean>(false);
 
+	const [getStatus, setStatus] = useState<any>();
+
+
+
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
+			idDonDat: [null],
 			idLoaiPhong: [null],
 			idPhongDat: [null],
 			tenLoaiPhong: [null, Validators.required],
@@ -41,6 +47,8 @@ export const CheckIn: FunctionComponent<({
 	);
 
 	const postCheckIn = async (item: any) => {
+
+
 		const rs = await DonDatApi.postCheckIn(item.idPhongDat);
 
 		setHasChange(true);
@@ -64,7 +72,7 @@ export const CheckIn: FunctionComponent<({
 		dialogService.openDialog(option => {
 			option.title = 'Chọn số phòng';
 			option.size = DialogSize.small;
-			option.content = (<AddRoom idPhongDat={myForm.get('idPhongDat').value} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
+			option.content = (<AddRoom  idPhongDat={myForm.get('idPhongDat').value} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
 		});
 
 		const handleCloseDialog = (hasChange: boolean) => {
@@ -78,7 +86,6 @@ export const CheckIn: FunctionComponent<({
 	}
 
 	const handleOpenGuest = (item?: any) => {
-
 		if (selected === false) {
 			dialogService.alert('Vui lòng chọn thao tác phòng trước');
 			return;
@@ -95,7 +102,7 @@ export const CheckIn: FunctionComponent<({
 		dialogService.openDialog(option => {
 			option.title = 'Thông tin khách ';
 			option.size = DialogSize.small;
-			option.content = (<AddGuest idPhongDat={myForm.get('idPhongDat').value} idKhachO={idKhachO} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
+			option.content = (<AddGuest idDonDat={myForm.get('idDonDat').value} idPhongDat={myForm.get('idPhongDat').value} idKhachO={idKhachO} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
 		});
 
 		const handleCloseDialog = (hasChange: boolean) => {
@@ -125,23 +132,20 @@ export const CheckIn: FunctionComponent<({
 		}
 	}
 
-	const getDataDetail = async (item: any) => {
-		const rs = await DonDatApi.getDetailPhongDat(item.idPhongDat);
-		const { khachO } = rs.data;
-
-		setDetailListData(khachO);
-	}
 
 	const getPhongDaChon = async (item: any) => {
+
 		loadingService.openLoading();
 		const rs = await DonDatApi.getDetailPhongDat(item.idPhongDat);
 
 		const { khachO } = rs.data;
 
 		setDetailListData(khachO);
+		
 
 		let data = {
-			tienLoaiPhong: calculatePrice(convertDate(rs.data.thoiGianRa), convertDate(rs.data.thoiGianVao), rs.data.tienLoaiPhong),
+			idDonDat : item.idDonDat,
+			tienLoaiPhong: calculatePrice(convertDate(rs.data.thoiGianRa), convertDate(rs.data.thoiGianVao), rs.data.tienLoaiPhong), 
 			...rs.data
 		};
 
@@ -199,6 +203,10 @@ export const CheckIn: FunctionComponent<({
 		console.log('getData', rs);
 
 		setListData(rs.data);
+
+		setStatus(props.trangThai)
+
+		// console.log(getStatus)
 	}
 
 	useEffect(() => {
@@ -206,7 +214,7 @@ export const CheckIn: FunctionComponent<({
 		getData();
 	}, []);
 
-	return CheckInView({ listData, detailListData, myForm, selected, closeDialog, handleOpenGuest, getPhongDaChon, handleOpenDialog, postCheckIn, checkIn, deleteKhach });
+	return CheckInView({ listData, detailListData, myForm, getStatus, selected, closeDialog, handleOpenGuest, getPhongDaChon, handleOpenDialog, postCheckIn, checkIn, deleteKhach });
 };
 
 export default CheckIn;

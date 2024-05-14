@@ -36,7 +36,7 @@ export const CheckInView = (props: any) => {
 
 
 					{
-						item.tenPhong !== null && item.trangThai !== "Checkin" && (
+						item.tenPhong !== null && item.trangThai !== "Checkin" && item.trangThai !== "Checkout" && (
 							<div className="btn-right">
 								<button
 									type="button"
@@ -83,13 +83,14 @@ export const CheckInView = (props: any) => {
 		},
 
 	];
+
 	return (
 		<div style={{ display: "flex", justifyContent: "space-around" }}>
 			<div style={{ width: "45%" }}>
 				<DialogButtonClose onClick={() => props.closeDialog()} />
 
 				<h4>
-					Thông tin phòng
+					Thông tin phòng 
 				</h4>
 				<hr />
 				<Table dataSource={props.listData} columns={columns} pagination={false} ></Table> <br />
@@ -103,13 +104,19 @@ export const CheckInView = (props: any) => {
 					<form style={{ borderLeft: "1px solid gray", paddingLeft: "55px" }}>
 						<h4>Gán phòng</h4>
 						<hr />
-						<button
-							type="button"
-							className="btn btn-primary"
-							onClick={() => props.handleOpenDialog()}
-						>
-							<PlusCircleOutlined className="mr-2" />Gán phòng
-						</button >
+
+						{props.getStatus === 'Checkout' ?
+							null
+							: <button
+								type="button"
+								className="btn btn-primary"
+								onClick={() => props.handleOpenDialog(props.item)}
+
+
+							>
+								<PlusCircleOutlined className="mr-2" />Gán phòng
+							</button >
+						}
 
 						<div style={{ display: "flex", justifyContent: "space-around" }}>
 							<div>
@@ -117,7 +124,7 @@ export const CheckInView = (props: any) => {
 									name="tenLoaiPhong"
 									meta={{ label: "Tên loại phòng" }}
 									render={InputText}
-									
+
 								/>
 							</div>
 
@@ -150,18 +157,25 @@ export const CheckInView = (props: any) => {
 							</div>
 						</div>
 						<h4>
-							
+
 							<br />
 							Thông tin khách
 						</h4>
 						<hr />
-						<button
-							type="button"
-							className="btn btn-primary"
-							onClick={() => props.handleOpenGuest()}
-						>
-							Thêm
-						</button >
+
+						{props.getStatus === 'Checkout' ?
+
+							null
+
+							: <button
+								type="button"
+								className="btn btn-primary"
+								onClick={() => props.handleOpenGuest()}
+
+							>
+								Thêm
+							</button >
+						}
 
 						<br />
 

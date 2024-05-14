@@ -25,11 +25,11 @@ export const LoaiDichVuView = (props: any) => {
 							Sửa
 						</Button>
 					</div>
-					<div className="btn-left">
+					{/* <div className="btn-left">
 						<Button type="text" onClick={() => props.deleteLoaiDichVu(item)}>
 							Xóa
 						</Button>
-					</div>
+					</div> */}
 
 				</div>
 			}

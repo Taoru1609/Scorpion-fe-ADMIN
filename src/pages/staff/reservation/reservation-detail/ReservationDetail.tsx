@@ -6,17 +6,24 @@ import { useDialog } from "src/common/services/dialog/Dialog.provider";
 import { DonDatApi } from "src/common/api/DonDatApi";
 import { DialogSize } from "src/common/services/dialog/Dialog.service";
 import CheckIn from "../check-in/CheckIn";
+import { useLoading } from "src/common/services/loading/Loading.provider";
 
 export const ReservationDetail: FunctionComponent<({
 	id?: string,
 	mode?: string,
+	trangThai?: any,
 	onClose: (hasChange: boolean) => void
 })> = (props) => {
 	const { dialogService } = useDialog();
 
 	const { dataShareService } = useDataShare();
 
+	const { loadingService } = useLoading();
+
 	const [listData, setListData] = useState<any[]>([]);
+
+	const [getStatus, setStatus] = useState<any>();
+
 
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
@@ -63,13 +70,16 @@ export const ReservationDetail: FunctionComponent<({
 			ghiChu: data.ghiChu
 
 		})
+		setStatus(props.trangThai)
+
 	}
 
 	const handleOpenDialog = () => {
+
 		dialogService.openDialog(option => {
 			option.title = 'Check In';
 			option.size = DialogSize.medium;
-			option.content = (<CheckIn id={props.id}  onClose={(event) => handleCloseDialog(event)} />)
+			option.content = (<CheckIn id={props.id} trangThai={props.trangThai} onClose={(event) => handleCloseDialog(event)} />)
 		});
 	}
 
@@ -79,6 +89,25 @@ export const ReservationDetail: FunctionComponent<({
 		getData();
 	}
 
+	const huyPhong = async (item?: any) => {
+		const result = await dialogService.confirm('Bạn có chắc chắn muốn hủy phòng không?');
+		if (!result) {
+			return;
+		}
+	
+			loadingService.openLoading();
+			
+			await DonDatApi.huyPhong(props.id);
+			// refesh data
+
+			loadingService.closeLoading();
+
+			await dialogService.alert('Hủy phòng thành công');
+			await getData();
+		
+		closeDialog();
+	}
+
 	// init page
 	useEffect(() => {
 		if (props.mode === 'view') myForm.disable();
@@ -86,7 +115,7 @@ export const ReservationDetail: FunctionComponent<({
 	}, []);
 
 
-	return ReservationDetailView({ mode: props.mode, myForm, listData, closeDialog, handleOpenDialog });
+	return ReservationDetailView({ mode: props.mode, getStatus, myForm, listData, closeDialog, handleOpenDialog, huyPhong });
 };
 
 export default ReservationDetail;
