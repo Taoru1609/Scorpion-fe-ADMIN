@@ -65,7 +65,7 @@ export const ReservationDetail: FunctionComponent<({
 			soDienThoai: data.sdt,
 			email: data.email,
 			quocTich: data.quocTich,
-			gioiTinh: data.gioiTinh,
+			gioiTinh: data.gioiTinh? 'Nam' : 'Nữ',
 			diaChi: data.diaChi,
 			ghiChu: data.ghiChu
 
@@ -75,7 +75,7 @@ export const ReservationDetail: FunctionComponent<({
 	}
 
 	const handleOpenDialog = () => {
-
+		
 		dialogService.openDialog(option => {
 			option.title = 'Check In';
 			option.size = DialogSize.medium;

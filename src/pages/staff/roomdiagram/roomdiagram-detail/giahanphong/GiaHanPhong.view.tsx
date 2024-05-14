@@ -2,6 +2,8 @@ import { CloseCircleOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import React from "react";
 import { FieldControl, FieldGroup } from "react-reactive-form";
 import InputDate from "src/common/controls/InputDate";
+import InputDateTime from "src/common/controls/InputDateTime";
+import InputText from "src/common/controls/InputText";
 
 export const GiaHanPhongView = (props: any) => {
 	return (<div>

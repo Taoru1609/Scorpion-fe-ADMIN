@@ -5,7 +5,7 @@ import { ValidatorExtention } from "src/common/ValidatorExtention";
 import { DonDatApi } from "src/common/api/DonDatApi";
 import { useDialog } from "src/common/services/dialog/Dialog.provider";
 
-export const GiaHanPhong: FunctionComponent <({
+export const GiaHanPhong: FunctionComponent<({
 
 	idPhongDat?: any,
 
@@ -13,7 +13,7 @@ export const GiaHanPhong: FunctionComponent <({
 })> = (props: any) => {
 	const { dialogService } = useDialog();
 
-	
+
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
 			idPhongDat: [null],
@@ -24,20 +24,24 @@ export const GiaHanPhong: FunctionComponent <({
 
 	const save = async () => {
 		debugger;
-		let formData = myForm.getRawValue();
-		if(formData.thoiGianRa){
-			formData.thoiGianRa = formData.thoiGianRa;
-		}
+
 		console.log(myForm.value)
-
-
-
-				await DonDatApi.giaHanPhong(myForm.value);
-				await dialogService.alert('Gia hạn phòng thành công');
-
-				closeDialog()
+		const date = new Date(myForm.value.thoiGianRa);
 
 		
+	
+		let newData = {
+			...myForm.value,
+			thoiGianRa: date.toLocaleDateString("en-GB") + ' 11:00:00' 
+	
+		}
+		console.log(newData)
+		await DonDatApi.giaHanPhong(newData);
+		await dialogService.alert('Gia hạn phòng thành công');
+
+		closeDialog()
+
+
 	}
 
 	const getData = async () => {
@@ -60,10 +64,10 @@ export const GiaHanPhong: FunctionComponent <({
 	// init page
 	useEffect(() => {
 		getData();
-	
+
 	}, []);
 
-	return GiaHanPhongView({myForm,closeDialog, save});
+	return GiaHanPhongView({ myForm, closeDialog, save });
 };
 
 export default GiaHanPhong;
