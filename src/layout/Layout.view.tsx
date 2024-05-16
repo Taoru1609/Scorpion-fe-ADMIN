@@ -38,14 +38,14 @@ export const LayoutView = () => {
       const menuData = [
         {
           id: 1,
-          icon: 'isax-clipboard-text1',
+          icon: 'isax-briefcase',
           label: 'QUẢN LÝ',
           url: null,
           parent: null
         },
         {
           id: 2,
-          icon: 'isax-document-text1',
+          icon: 'isax-bezier1',
           label: 'Phòng',
           url: null,
           parent: 1
@@ -53,21 +53,21 @@ export const LayoutView = () => {
 
         {
           id: 3,
-          icon: 'isax-document-text1',
+          icon: 'isax-buildings-2',
           label: 'Thông tin loại phòng',
           url: '/admin/roomtype',
           parent: 2
         },
         {
           id: 4,
-          icon: 'isax-document-text1',
+          icon: 'isax-building',
           label: 'Danh sách phòng',
           url: '/admin/roomlist',
           parent: 2
         },
         {
           id: 5,
-          icon: 'isax-chart-square',
+          icon: 'isax-align-left',
           label: 'Thống kê',
           url: '/admin/thongke',
           parent: 1
@@ -75,14 +75,14 @@ export const LayoutView = () => {
 
         {
           id: 6,
-          icon: 'isax-chart-square',
+          icon: 'isax-chart-1',
           label: 'Doanh thu',
           url: '/admin/doanhthu',
           parent: 1
         },
         {
           id: 7,
-          icon: 'isax-document-text1',
+          icon: 'isax-archive-book',
           label: 'Danh mục',
           url: null,
           parent: 1
@@ -90,14 +90,14 @@ export const LayoutView = () => {
 
         {
           id: 8,
-          icon: 'isax-document-text1',
+          icon: 'isax-save-add',
           label: 'Loại dịch vụ',
           url: '/admin/qldichvu/loaidichvu',
           parent: 7
         },
         {
           id: 9,
-          icon: 'isax-document-text1',
+          icon: 'isax-reserve',
           label: 'Dịch vụ',
           url: '/admin/qldichvu/dichvu',
           parent: 7
@@ -105,7 +105,7 @@ export const LayoutView = () => {
         
         {
           id: 10,
-          icon: 'isax-document-text1',
+          icon: 'isax-key-square1',
           label: 'Tài khoản',
           url: '/admin/taikhoanadmin',
           parent: 1
@@ -113,14 +113,14 @@ export const LayoutView = () => {
        
         {
           id: 11,
-          icon: 'isax-document-text1',
+          icon: 'isax-money-recive1',
           label: 'GIAO DỊCH',
           url: null,
           parent: null
         },
         {
           id: 12,
-          icon: 'isax-clipboard-text1',
+          icon: 'isax-calendar-2',
           label: 'Danh sách đơn đặt',
           url: '/staff/reservation',
           parent: 11,

@@ -38,6 +38,16 @@ export const ReservationView = (props: any) => {
 			key: 'soDienThoai',
 		},
 		{
+			title: 'Thời gian vào',
+			dataIndex: 'thoiGianVao',
+			key: 'thoiGianVao',
+		},
+		{
+			title: 'Thời gian ra',
+			dataIndex: 'thoiGianRa',
+			key: 'thoiGianRa',
+		},
+		{
 			title: 'Trạng thái',
 			dataIndex: 'trangThai',
 			key: 'trangThai',

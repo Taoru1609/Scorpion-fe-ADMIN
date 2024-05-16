@@ -48,12 +48,18 @@ export const CheckIn: FunctionComponent<({
 
 	const postCheckIn = async (item: any) => {
 
+		try {
+			const rs = await DonDatApi.postCheckIn(item.idPhongDat);
 
-		const rs = await DonDatApi.postCheckIn(item.idPhongDat);
+			setHasChange(true);
+			await dialogService.alert('Check in thành công');
+			getData();
+		} catch (error: any) {
+			dialogService.alert(error.response.data)
 
-		setHasChange(true);
-		await dialogService.alert('Check in thành công');
-		getData();
+		}
+
+
 	}
 
 	const closeDialog = () => {
@@ -72,7 +78,7 @@ export const CheckIn: FunctionComponent<({
 		dialogService.openDialog(option => {
 			option.title = 'Chọn số phòng';
 			option.size = DialogSize.small;
-			option.content = (<AddRoom  idPhongDat={myForm.get('idPhongDat').value} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
+			option.content = (<AddRoom idPhongDat={myForm.get('idPhongDat').value} idLoaiPhong={myForm.get('idLoaiPhong').value} onClose={(hasChange: boolean) => handleCloseDialog(hasChange)} />)
 		});
 
 		const handleCloseDialog = (hasChange: boolean) => {
@@ -141,11 +147,11 @@ export const CheckIn: FunctionComponent<({
 		const { khachO } = rs.data;
 
 		setDetailListData(khachO);
-		
+
 
 		let data = {
-			idDonDat : item.idDonDat,
-			tienLoaiPhong: calculatePrice(convertDate(rs.data.thoiGianRa), convertDate(rs.data.thoiGianVao), rs.data.tienLoaiPhong), 
+			idDonDat: item.idDonDat,
+			tienLoaiPhong: calculatePrice(convertDate(rs.data.thoiGianRa), convertDate(rs.data.thoiGianVao), rs.data.tienLoaiPhong),
 			...rs.data
 		};
 
