@@ -1,4 +1,4 @@
-import { CloseOutlined, PlusCircleOutlined } from "@ant-design/icons";
+import { CloseOutlined, DeleteOutlined, EditOutlined, PlusCircleOutlined } from "@ant-design/icons";
 import { Button, InputNumber, Pagination, Table } from "antd";
 import React from "react";
 import { FieldControl, FieldGroup } from "react-reactive-form";
@@ -23,12 +23,12 @@ export const RoomDiagramDetailView = (props: any) => {
 				return <div>
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.handleOpenGuest(item)}>
-							Sửa
+							<EditOutlined />
 						</Button>
 					</div>
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.deleteKhach(item)}>
-							Xóa
+							<DeleteOutlined />
 						</Button>
 					</div>
 
@@ -67,13 +67,13 @@ export const RoomDiagramDetailView = (props: any) => {
 			}
 		},
 
-		
+
 		{
 			title: 'Số lượng',
 
 			dataIndex: 'soLuong',
-			key: 'soLuong',	
-		
+			key: 'soLuong',
+
 
 		},
 
@@ -83,12 +83,14 @@ export const RoomDiagramDetailView = (props: any) => {
 				return <div>
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.handleOpenUpdateDichVu(item)}>
-							Sửa
+							<EditOutlined />
+
 						</Button>
 					</div>
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.handleDeleteDichVu(item)}>
-							Xóa
+							<DeleteOutlined />
+
 						</Button>
 					</div>
 
@@ -99,7 +101,7 @@ export const RoomDiagramDetailView = (props: any) => {
 	];
 
 	return (<div className="room-detail-202405031420">
-		
+
 		<div className="content-data">
 			<div className="form-data">
 				<FieldGroup
@@ -198,27 +200,27 @@ export const RoomDiagramDetailView = (props: any) => {
 				</center>
 			</div>
 
-		
+
 		</div>
 
 		{/* Table Dịch vụ */}
 
 		<div className="table-data2">
-				<h4 className="text-form-2024">
-					Dịch vụ
-				</h4>
-				<hr />
-				<Table rowKey="id" dataSource={props.listDataDV} columns={columns2}   pagination={{ pageSize: 3 }}></Table> <br />
-				<center>
-					<button
-						type="button"
-						className="btn btn-primary"
-						onClick={() => props.handleOpenDialogDichVu()}
-					>
-						Thêm
-					</button >
-				</center>
-			</div>
+			<h4 className="text-form-2024">
+				Dịch vụ
+			</h4>
+			<hr />
+			<Table rowKey="id" dataSource={props.listDataDV} columns={columns2} pagination={{ pageSize: 3 }}></Table> <br />
+			<center>
+				<button
+					type="button"
+					className="btn btn-primary"
+					onClick={() => props.handleOpenDialogDichVu()}
+				>
+					Thêm
+				</button >
+			</center>
+		</div>
 		<hr />
 
 		<div className="list-control-search">

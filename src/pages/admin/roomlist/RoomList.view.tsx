@@ -1,3 +1,4 @@
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { render } from "@testing-library/react";
 import { Button, Select, Table } from "antd";
 import React from "react";
@@ -42,12 +43,12 @@ export const RoomListView = (props: any) => {
 				return <div>
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.handleOpenDialog(item)}>
-							Sửa
+						<EditOutlined />
 						</Button>
 					</div>
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.deletePhong(item)}>
-							Xóa
+						<DeleteOutlined />
 						</Button>
 					</div>
 

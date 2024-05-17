@@ -24,8 +24,8 @@ export const UpdateDichVuView = (props: any) => {
 					<div >
 						<FieldControl
 							name="soLuong"
-							meta={{ label: "Số lượng" }}
-							render={InputNumber}
+							meta={{ label: "Số lượng", min: 0 }}							
+							render={InputNumber }
 						/>
 					</div>
 

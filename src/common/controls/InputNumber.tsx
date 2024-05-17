@@ -8,7 +8,8 @@ export const InputNumber = (props: ({ handler?: any, touched?: any, hasError?: a
 				<NzInputNumber<number> status={props.touched && props.hasError("error") ? 'error' : null}
 					placeholder={props.meta?.placeholder}
 					formatter={(value) => `${value}`.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}
-					parser={(value) => value?.replace(/\$\s?|(,*)/g, '') as unknown as number}
+					parser={(value) => value?.replace(/\$\s?|(,*)/g, '') as unknown as number}		
+					min={props.meta?.min}			
 					{...props.handler()}
 				/>
 			</div>

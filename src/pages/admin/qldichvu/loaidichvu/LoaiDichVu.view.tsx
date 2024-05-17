@@ -1,3 +1,4 @@
+import { EditOutlined } from "@ant-design/icons";
 import { Button, Table } from "antd";
 import React from "react";
 
@@ -22,7 +23,7 @@ export const LoaiDichVuView = (props: any) => {
 				return <div>
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.handleOpenDialog(item)}>
-							Sửa
+						{<EditOutlined />}
 						</Button>
 					</div>
 					{/* <div className="btn-left">

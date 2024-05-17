@@ -13,6 +13,7 @@ export const DichVu: FunctionComponent = (props: any) => {
 	const { loadingService } = useLoading();
 
 	const [listData, setListData] = useState<any[]>([]);
+	
 	const getData = async (id?: any) => {
 		loadingService.openLoading();
 		const rs = await DonDatApi.locTheoDichVu(id);

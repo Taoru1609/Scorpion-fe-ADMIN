@@ -1,4 +1,4 @@
-import { CloseCircleOutlined } from "@ant-design/icons";
+import { CloseCircleOutlined, DeleteOutlined } from "@ant-design/icons";
 import { Button, Table } from "antd";
 import React from "react";
 
@@ -28,7 +28,8 @@ export const HinhAnhView = (props: any) => {
 				
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.deleteHinhAnh(item)}>
-							Xóa
+						<DeleteOutlined />
+
 						</Button>
 					</div>
 	

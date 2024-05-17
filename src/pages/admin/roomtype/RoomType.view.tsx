@@ -1,3 +1,4 @@
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Table } from "antd";
 import React from "react";
 import DialogButtonClose from "src/common/services/dialog/DialogButtonClose";
@@ -50,12 +51,12 @@ export const RoomTypeView = (props: any) => {
 				return <div>
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.handleOpenDialog(item)}>
-							Sửa
+						{<EditOutlined />}
 						</Button>
 					</div>
 					<div className="btn-left">
 						<Button type="text" onClick={() => props.deleteLoaiPhong(item)}>
-							Xóa
+						{<DeleteOutlined />}
 						</Button>
 					</div>
 
