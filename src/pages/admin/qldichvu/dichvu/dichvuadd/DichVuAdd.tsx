@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup } from "react-reactive-form";
 import { ValidatorExtention } from "src/common/ValidatorExtention";
 import { DonDatApi } from "src/common/api/DonDatApi";
 import { useDialog } from "src/common/services/dialog/Dialog.provider";
+import { useStatePromise } from "src/common/components/useStateSync";
 
 export const DichVuAdd: FunctionComponent  <({
 
@@ -13,10 +14,10 @@ export const DichVuAdd: FunctionComponent  <({
 })>  = (props: any) => {
 
 	const { dialogService } = useDialog();
-	const [hasChange, setHasChange] = useState<boolean>(false);
-	const [listOption, setOption] = useState<any[]>([]);
-	const [selectedDichVu, setSelectedDichVu] = useState<any>();
-	const [getId, setId] = useState<any>();
+	const [hasChange, setHasChange] = useStatePromise<boolean>(false);
+	const [listOption, setOption] = useStatePromise<any[]>([]);
+	const [selectedDichVu, setSelectedDichVu] = useStatePromise<any>(null);
+	const [getId, setId] = useStatePromise<any>(null);
 
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
@@ -28,19 +29,21 @@ export const DichVuAdd: FunctionComponent  <({
 	);
 
 	const saveDichVu = async () => {
+		
 		if(myForm.invalid) return;
+		let formData = myForm.getRawValue();
 
 		let newData = {
-			...myForm.value,
+			...formData,
 			loaiDichVuIdLoaiDichVu : {
-				id: myForm.value.loaiDichVuIdLoaiDichVu
+				id: formData.loaiDichVuIdLoaiDichVu
 			}
 		}
 		
 		if(props.id){
 			newData.id = props.id
 			newData.loaiDichVuIdLoaiDichVu = {
-				id: selectedDichVu
+				id: selectedDichVu.value
 			}
 			
 			await DonDatApi.updateDichVu(newData);
@@ -65,16 +68,17 @@ export const DichVuAdd: FunctionComponent  <({
 	const getOption = async () => {
 		const rs = await DonDatApi.getLoaiDichVu();
 		setOption(rs.data);
-		console.log(listOption)
+		console.log(listOption.value)
 	}
 
-	const chonDichVu = (id: any) => {
-		myForm.controls['loaiDichVuIdLoaiDichVu'].patchValue(selectedDichVu);
-		setSelectedDichVu(id)
+	const chonDichVu = async (id: any) => {
+		console.log(id)
+		await setSelectedDichVu(id)
+		myForm.controls['loaiDichVuIdLoaiDichVu'].patchValue(selectedDichVu.value);
 	}
 
 	const closeDialog = () => {
-		props.onClose(hasChange);
+		props.onClose(hasChange.value);
 	}
 
 	useEffect(() => {

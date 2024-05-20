@@ -30,7 +30,7 @@ export const NavbarView = (props: ({ open: boolean, onChange: (value: boolean) =
 				icon={props.open ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
 				onClick={() => props.onChange(!props.open)}
 			/>
-			<div className="demo-logo" > <img src="/images/c529f161-a050-4cd9-9904-d7508a610055.png" width={'80'} alt="" />    Quản lý đặt phòng khách sạn Scorpion</div>
+			<div className="demo-logo" > <img src="/images/c529f161-a050-4cd9-9904-d7508a610055.png" width={'80'} alt="" />    Quản lý đặt phòng khách sạn Scorpio</div>
 			<div style={{position: "absolute", right: 35, cursor: "pointer"}} onClick={() => logout()}>Đăng xuất</div>
 		</Header>
 	);

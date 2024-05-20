@@ -1,6 +1,5 @@
 import { CaretLeftOutlined, CaretRightOutlined, StepBackwardOutlined, StepForwardOutlined } from "@ant-design/icons";
 import { Select } from "antd";
-import React, { useEffect, useState } from "react";
 import { PagingModal } from "src/common/model/PagingModal";
 
 export const PagingView = (props: ({ data: PagingModal, onChange: (page: number) => void })) => {
@@ -8,7 +7,7 @@ export const PagingView = (props: ({ data: PagingModal, onChange: (page: number)
 	let view: number = 5;
 	const lstPage: any[] = [];
 
-	if (!props.data || props.data.count < props.data.size) { return <></>; }
+	if (!props.data || props.data?.count < props.data?.size) { return <div></div>; }
 
 	const curentPage = props.data.page;
 	const totalPage = Math.ceil(props.data.count / props.data.size);
@@ -48,15 +47,7 @@ export const PagingView = (props: ({ data: PagingModal, onChange: (page: number)
 		<div className="paging-wapper paging-202404201533">
 			<div className="temp1">
 				<div className="paging-title">
-					{totalItem > 0 ? (
-						<span>
-							Có {totalItem} kết quả được tìm thấy
-						</span>
-					) : (
-						<span>
-							Không tìm thấy kết quả nào
-						</span>
-					)}
+					Có {totalItem} kết quả được tìm thấy
 				</div>
 				<ul className="pagination mr-auto">
 					<li className={'page-item ' + (curentPage < 2 ? 'disabled' : '')}>

@@ -22,7 +22,7 @@ export const AddRoomList: FunctionComponent  <({
 	const [myForm] = useState<FormGroup>(
 		FormBuilder.group({
 			loaiPhongIdLoaiPhong: [ null],
-			soPhong: ['', ValidatorExtention.required('Số phòng vụ không được để trống')],
+			soPhong: ['', ValidatorExtention.required('Số phòng không được để trống')],
 			soTang: ['', ValidatorExtention.required('Số tầng không được để trống')],
 			trangThai: [1]
 		})

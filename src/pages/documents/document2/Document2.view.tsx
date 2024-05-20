@@ -34,7 +34,7 @@ export const Document2View = (props: any) => {
 
 	return (
 		<div>
-			<BreadcumbView>
+			<BreadcumbView items={[{title:'Documnet1'}]}>
 				<>
 					<AuthorView code={['001-add']}>
 						<button
@@ -69,7 +69,7 @@ export const Document2View = (props: any) => {
 						)}
 					/>
 				</FormSearchBasicView>
-				<TableView dataSource={props.listData} columns={columns}></TableView>
+				<TableView rowKey={'id'} dataSource={props.listData} columns={columns}></TableView>
 				<PagingView data={props.paging} onChange={(page) => changePage(page)}></PagingView>
 			</Content>
 		</div >

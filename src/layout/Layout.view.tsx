@@ -39,7 +39,7 @@ export const LayoutView = () => {
         {
           id: 1,
           icon: 'isax-briefcase',
-          label: 'QUẢN LÝ',
+          label: 'DANH MỤC',
           url: null,
           parent: null
         },

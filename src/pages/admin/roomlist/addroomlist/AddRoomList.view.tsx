@@ -6,7 +6,7 @@ import InputNumber from "src/common/controls/InputNumber";
 
 export const AddRoomListView = (props: any) => {
 	return (<div>
-		<label htmlFor="">Chọn loại dịch vụ</label>
+		<label htmlFor="">Chọn loại phòng</label>
 		
 		<Select
 			value={props.selectedPhong}

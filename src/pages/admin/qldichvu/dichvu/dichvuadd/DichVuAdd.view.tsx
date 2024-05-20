@@ -11,11 +11,11 @@ export const DichVuAddView = (props: any) => {
 		<label htmlFor="">Chọn loại dịch vụ</label>
 		
 		<Select
-			value={props.selectedDichVu}
+			value={props.selectedDichVu.value}
 			fieldNames={{ label: 'tenLoaiDichVu', value: 'id' }}
 			style={{ width: "100%" }}
 			onChange={(event) => props.chonDichVu(event)}
-			options={props.listOption}
+			options={props.listOption.value}
 		/>
 		<FieldGroup
 			control={props.myForm}

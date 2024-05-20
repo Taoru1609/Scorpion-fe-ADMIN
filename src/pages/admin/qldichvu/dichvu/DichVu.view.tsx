@@ -40,11 +40,7 @@ export const DichVuView = (props: any) => {
 						{<EditOutlined />}
 						</Button>
 					</div>
-					{/* <div className="btn-left">
-						<Button type="text" onClick={() => props.deleteLoaiDichVu(item)}>
-							Xóa
-						</Button>
-					</div> */}
+				
 
 				</div>
 			}
